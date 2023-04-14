@@ -18,5 +18,23 @@ const format = (data) => {
 
   return { id, name, image, hp, attack, defense, speed, height, weight, types }
 }
+const transformCacheDb = (array) => {
+  return array.map(obj => ({
+    id: obj.id,
+    name: obj.name,
+    hp: obj.hp,
+    attack: obj.attack,
+    defense: obj.defense,
+    speed: obj.speed,
+    height: obj.height,
+    weight: obj.weight,
+    image: obj.image,
+    custom: obj.custom,
+    types: obj.dataValues.types.map(typeObj => typeObj.dataValues.name)
+  }));
+}
 
-module.exports = format;
+module.exports = {
+  format,
+  transformCacheDb,
+};

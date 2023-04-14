@@ -1,5 +1,5 @@
 const axios = require("axios");
-const format = require("../utils/format")
+const { format, transformCacheDb } = require("../utils/format")
 const { Pokemon, Type } = require("../db")
 
 var cacheAll = [];
@@ -40,31 +40,21 @@ const getPokemons = async (page, order, sort, type, custom) => {
   return temp.slice(offset, offset + limit);
 }
 
-const dd = (cache) => {
-  return cache.map(elem => { return { ...elem, types: Object.values(elem.types.map(elem => elem.name)) } })
-}
-
 const getAll = async (cacheDb, cacheApi, cacheMax) => {
   let totalDb = await Pokemon.count(); var t = [];
   if (totalDb != cacheDb.length) {
     cacheDb = await Pokemon.findAll({
       include: {
         model: Type,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        }
+        // attributes: ["name"],
+        // through: {
+        //   attributes: [],
+        // }
       },
     });
   }
-  // cacheDb = dd([...cacheDb])
-  // cacheDb = cacheDb.map(elem => { return { ...elem, types: [...Object.values(elem.types.map(elem => elem.name))] } })
-  cacheDb = cacheDb.map(elem => {
-    return {
-      ...elem, types:
-        [...Object.values(elem.types.map(elem => elem.name))]
-    }
-  })
+
+  cacheDb = transformCacheDb(cacheDb);
 
   if (cacheApi.length === 0) {
     cont = 1;
@@ -78,7 +68,8 @@ const getAll = async (cacheDb, cacheApi, cacheMax) => {
       cont++;
     }
   }
-  return [...cacheDb, ...cacheApi];
+  cacheAll = [...cacheDb, ...cacheApi]
+  return cacheAll;
 }
 
 const orderAll = (array, order, sort) => {
