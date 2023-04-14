@@ -1,0 +1,20 @@
+
+
+http://localhost:3001/pokemons/?name=pikachu
+
+
+FILTRAR
+http://localhost:3001/pokemons/?type=normal&custom=false
+http://localhost:3001/pokemons/?type=poison&custom=true
+
+
+ORDENAR
+http://localhost:3001/pokemons/?order=desc&sort=attack
+http://localhost:3001/pokemons/?order=asc&sort=attack
+
+http://localhost:3001/pokemons/?order=desc&sort=name
+http://localhost:3001/pokemons/?order=asc&sort=name
+
+
+order
+attack or name
