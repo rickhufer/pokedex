@@ -6,71 +6,69 @@ var cacheAll = [];
 var cacheApi = [];
 var cacheDb = [];
 
-
 const getPokemons = async (page, order, sort, type, custom) => {
-  let temp = [];
-  var cacheAllOrder = [];
-  var cacheMax = 60; let limit = 24; var offset;
+  if (custom === "true") custom = true;
+  if (custom === "false") custom = false;
 
-  // Crea el caché
-  cacheAll = await getAll(cacheDb, cacheApi, cacheMax);
-  temp = [...cacheAll];
+  var cacheMax = 24; let limit = 24; var offset;
+
+  // Crea el caché y temp
+  if (cacheApi.length !== cacheMax) {
+    cacheApi = await getApi(cacheMax)
+  };
+  cacheDb = await getDb();
+  cacheAll = [...cacheDb, ...cacheApi];
 
   // Ordenación
   if (order && sort) {
-    cacheAllOrder = orderAll([...cacheAll], order, sort);
-    temp = [...cacheAllOrder];
+    cacheAll = orderAll([...cacheAll], order, sort);
+    console.log("Entré en order y sort");
   }
 
   // Filtrados
-  if (type && custom) {
-    temp = cacheAll.filter(elem => elem.types.includes(type));
-    temp = temp.filter(elem => elem.custom === custom);
-  }
   if (type) {
-    temp = cacheAll.filter(elem => elem.types.includes(type));
+    cacheAll = cacheAll.filter(elem => elem.types.includes(type));
   }
-  if (custom) {
-    temp = cacheAll.filter(elem => elem.custom === custom);
-  }
+  if (custom === true || custom === false) {
+    cacheAll = cacheAll.filter(elem => elem.custom === custom);
+  };
 
   //paginado
   // if (page === undefined) page = 1;
   // offset = (page - 1) * limit;
   // return temp.slice(offset, offset + limit);
-  return temp;
+  return cacheAll;
 }
 
-const getAll = async (cacheDb, cacheApi, cacheMax) => {
-  let totalDb = await Pokemon.count(); var t = [];
-  if (totalDb != cacheDb.length) {
-    cacheDb = await Pokemon.findAll({
-      include: {
-        model: Type,
-        // attributes: ["name"],
-        // through: {
-        //   attributes: [],
-        // }
-      },
-    });
+const getApi = async (cacheMax) => {
+  cont = 1;
+
+  while (cont <= cacheMax) {
+    const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${cont}`);
+
+    let myPoke = format(data.data);
+    myPoke.custom = false;
+    cacheApi.push(myPoke);
+    cont++;
   }
 
+  return cacheApi;
+}
+
+const getDb = async () => {
+  let cacheDb = await Pokemon.findAll({
+    include: {
+      model: Type,
+      // attributes: ["name"],
+      // through: {
+      //   attributes: [],
+      // }
+    },
+  });
+  // }
   cacheDb = transformCacheDb(cacheDb);
 
-  if (cacheApi.length === 0) {
-    cont = 1;
-
-    while (cont <= cacheMax) {
-      const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${cont}`);
-
-      let myPoke = format(data.data);
-      myPoke.custom = false;
-      cacheApi.push(myPoke);
-      cont++;
-    }
-  }
-  cacheAll = [...cacheDb, ...cacheApi]
-  return cacheAll;
+  return cacheDb;
 }
 
 const orderAll = (array, order, sort) => {
@@ -107,23 +105,30 @@ const orderAll = (array, order, sort) => {
 
 const getPokemonByName = async (name) => {
 
-  const dataDb = await Pokemon.findOne({
+  let dataDb = await Pokemon.findAll({
     where: { name: name },
     include: {
       model: Type,
-      attributes: ["name"],
-      through: {
-        attributes: [],
-      }
+      // attributes: ["name"],
+      // through: {
+      //   attributes: [],
+      // }
     },
-  })
+  });
 
-  if (dataDb === null) {
-    const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-    return format(data.data);
+  if (dataDb.length > 0) {
+    dataDb = transformCacheDb(dataDb);
+    return dataDb;
+  }
+  if (dataDb.length === 0) {
+    try {
+      const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+      return format(data.data);
+    } catch (error) {
+      throw Error("Este pokemon no existe en los originales ni en los personalizados")
+    }
   }
 
-  return dataDb.dataValues;
 }
 
 
@@ -131,19 +136,30 @@ const getPokemonByName = async (name) => {
 const getPokemonById = async (id) => {
 
   if (isNaN(id)) {
-    const dataDb = await Pokemon.findByPk(id, {
-      include: {
-        model: Type,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        }
-      },
-    });
-    return dataDb;
+    try {
+      let dataDb = await Pokemon.findAll({
+        where: { id: id },
+        include: {
+          model: Type,
+          // attributes: ["name"],
+          // through: {
+          //   attributes: [],
+          // }
+        },
+      });
+      dataDb = transformCacheDb(dataDb);
+      return dataDb;
+    } catch (error) {
+      throw Error("Este pokemon no existe en los personalizados")
+    }
+
   } else {
-    const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    return format(data.data);
+    try {
+      const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      return format(data.data);
+    } catch (error) {
+      throw Error("Este pokemon no existe en los originales")
+    }
   }
 }
 
