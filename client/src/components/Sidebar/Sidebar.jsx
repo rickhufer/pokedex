@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Sidebar.module.css"
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { allPokemons, allTypes, allMyPokemons, orderPoke } from "../../redux/actions";
-
+import { allPokemons, allTypes, allMyPokemons } from "../../redux/actions";
 
 const Sidebar = () => {
   const [order, setOrder] = useState({
@@ -21,13 +19,15 @@ const Sidebar = () => {
   const myTypes = useSelector(state => state.myTypes);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    let querys = "?" + formatOrder(order) + "&" + formatFilter(filters);
-    console.log(querys);
-    await dispatch(allPokemons(querys));
-    await dispatch(allTypes());
-    dispatch(allMyPokemons());
-  }, [order, filters]);
+  useEffect(() => {
+    async function inicio() {
+      let querys = "?" + formatOrder(order) + "&" + formatFilter(filters);
+      await dispatch(allTypes());
+      await dispatch(allPokemons(querys));
+      dispatch(allMyPokemons());
+    }
+    inicio();
+  }, [dispatch, order, filters]);
 
   const formatOrder = ({ asc, desc, alfa, attack, }) => {
     let a = !asc && !desc ? ("") : (asc && !desc ? "order=asc" : "order=desc");
@@ -60,16 +60,16 @@ const Sidebar = () => {
   }
   const handleAlfa = (event) => {
     if (event.target.checked) {
-      setOrder({ ...order, tipo: false, alfa: true })
+      setOrder({ ...order, attack: false, alfa: true })
     }
-    else setOrder({ ...order, tipo: true, alfa: false })
+    else setOrder({ ...order, attack: true, alfa: false })
   }
 
   const handleAttack = (event) => {
     if (event.target.checked) {
-      setOrder({ ...order, tipo: true, alfa: false })
+      setOrder({ ...order, attack: true, alfa: false })
     }
-    else setOrder({ ...order, tipo: false, alfa: true })
+    else setOrder({ ...order, attack: false, alfa: true })
   }
 
   const handleTipo = (event) => {
@@ -79,12 +79,18 @@ const Sidebar = () => {
     })
   }
   const handleOriginal = (event) => {
-    var valor = event.target.checked;
-    valor ? (setFilters({ ...filters, original: true, })) : (setFilters({ ...filters, original: false, }))
+    if (event.target.checked) {
+      if (filters.custom) { setFilters({ ...filters, custom: false, original: true }) }
+      else setFilters({ ...filters, original: true });
+    }
+    else setFilters({ ...filters, original: false });
   }
   const handleCustom = (event) => {
-    var valor = event.target.checked;
-    valor ? (setFilters({ ...filters, custom: true, })) : (setFilters({ ...filters, custom: false, }))
+    if (event.target.checked) {
+      if (filters.original) { setFilters({ ...filters, custom: true, original: false }) }
+      else setFilters({ ...filters, custom: true });
+    }
+    else setFilters({ ...filters, custom: false });
   }
 
   return (

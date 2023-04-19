@@ -1,39 +1,10 @@
 import styles from "./Card.module.css"
 import { Link } from "react-router-dom"
-import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { addFavorite, removeFavorite } from "../../redux/actions";
 import React from "react";
 
-const Card = ({ id, name, image, custom, types }) => {
-
-  // const [isFav, setIsFav] = useState(false);
-
-  // const handleFavorite = () => {
-  //   if (isFav) {
-  //     setIsFav(false);
-  //     removeFavorite(id);
-  //   } else {
-  //     setIsFav(true);
-  //     addFavorite({
-  //       id,
-  //       name,
-  //       species,
-  //       gender,
-  //       image,
-  //       status,
-  //       origin,
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   allCharacters.forEach((fav) => {
-  //     if (fav.id === id) {
-  //       setIsFav(true);
-  //     }
-  //   });
-  // }, [allCharacters]);
+const Card = ({ name, image, custom, types }) => {
 
   return (
     <div className={styles.scCardProduct}>

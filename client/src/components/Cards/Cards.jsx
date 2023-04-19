@@ -1,28 +1,18 @@
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import CardModal from '../CardModal';
 import styles from "./Cards.module.css"
-
-import { allPokemons, allTypes, allMyPokemons, orderPoke } from "../../redux/actions";
-import { useEffect } from "react";
 import Card from "../Card/Card"
 
 const Cards = () => {
 
-  const dispatch = useDispatch();
   const myPokemons = useSelector((state) => state.myPokemons);
 
   const [visible, setVisible] = useState(6);
   const showMoreItems = () => {
     setVisible((prevValue) => prevValue + 6);
   }
-
-  useEffect(async () => {
-
-  }, []);
-
-  const [modalShow, setModalShow] = useState(false);
 
   return (
     <div>
@@ -46,10 +36,6 @@ const Cards = () => {
             </div>
           }
         </div>
-        {/* <CardModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        /> */}
       </>
     </div>
   )
