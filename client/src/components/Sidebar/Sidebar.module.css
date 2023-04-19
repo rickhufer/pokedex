@@ -22,7 +22,7 @@
 
 
 .orden {
-  background-color: azure;
+  background-color: rgba(240, 255, 255, 0.50);
   flex-basis: 48%;
   border-radius: 10px;
   margin: 5px;
@@ -30,7 +30,7 @@
 }
 
 .filtrado {
-  background-color: azure;
+  background-color: rgba(240, 255, 255, 0.50);
   flex-basis: 48%;
   border-radius: 10px;
   margin: 5px;

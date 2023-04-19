@@ -3,7 +3,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import styles from "./Main.module.css"
 
 
-const Main = ({ data }) => {
+const Main = () => {
   return (
     <div className={styles.cont}>
       <div className={styles.cont2}>
@@ -12,7 +12,7 @@ const Main = ({ data }) => {
             <Sidebar />
           </div>
           <div className={styles.myCards}>
-            <Cards data={data} />
+            <Cards />
           </div>
         </div>
       </div>

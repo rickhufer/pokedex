@@ -1,0 +1,57 @@
+.formContainer {
+  max-width: 992px;
+  width: 95%;
+  margin: 30px auto;
+  color: white;
+}
+
+
+.group {
+  padding-bottom: 15px;
+}
+
+.inputMessage {
+  color: red;
+}
+
+.success {
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  border: none;
+  font-size: 1.8rem;
+}
+
+.errors {
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  border: 2px solid red;
+  font-size: 1.8rem;
+}
+
+.success:focus {
+  /* border: #86b7fe; */
+  box-shadow: 0 0 0 0.25rem rgba(0, 255, 42, 0.593);
+  outline: 0;
+}
+
+.errors:focus {
+  /* border: #86b7fe; */
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.593);
+  outline: 0;
+}
+
+.button {
+  padding: 10px;
+  border-radius: 0.4rem;
+  border: none;
+  margin: 20px auto;
+  background-color: rgb(199, 163, 41);
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(29, 28, 28);
+  cursor: pointer;
+}
+
+/* .label {
+  padding-top: 20px;
+} */

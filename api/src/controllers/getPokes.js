@@ -10,7 +10,7 @@ var cacheDb = [];
 const getPokemons = async (page, order, sort, type, custom) => {
   let temp = [];
   var cacheAllOrder = [];
-  var cacheMax = 24; let limit = 12; var offset;
+  var cacheMax = 60; let limit = 24; var offset;
 
   // Crea el caché
   cacheAll = await getAll(cacheDb, cacheApi, cacheMax);
@@ -35,9 +35,10 @@ const getPokemons = async (page, order, sort, type, custom) => {
   }
 
   //paginado
-  if (page === undefined) page = 1;
-  offset = (page - 1) * limit;
-  return temp.slice(offset, offset + limit);
+  // if (page === undefined) page = 1;
+  // offset = (page - 1) * limit;
+  // return temp.slice(offset, offset + limit);
+  return temp;
 }
 
 const getAll = async (cacheDb, cacheApi, cacheMax) => {
@@ -59,7 +60,7 @@ const getAll = async (cacheDb, cacheApi, cacheMax) => {
   if (cacheApi.length === 0) {
     cont = 1;
 
-    while (cont < cacheMax) {
+    while (cont <= cacheMax) {
       const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${cont}`);
 
       let myPoke = format(data.data);

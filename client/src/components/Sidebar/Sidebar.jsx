@@ -1,7 +1,57 @@
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Sidebar.module.css"
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
-const Sidebar = ({ data }) => {
+const Sidebar = () => {
+  const [order, setOrder] = useState({ asc: false, desc: false });
+
+  const [isOriginal, setIsOriginal] = useState(true);
+  const [isCustom, setIsCustom] = useState(true);
+
+  // const [filters, setFilters] = useState({
+  //   type: "",
+  //   custom: "",
+  // });
+  // const [ordering, setOrdering] = useState({
+  //   order: "",
+  //   sort: "",
+  // });
+
+  const myPokemons = useSelector(state => state.myPokemons);
+  const dispatch = useDispatch();
+
+  const handleOriginal = (event) => {
+    if (event.target.checked) setIsOriginal(true);
+    else setIsOriginal(false);
+  }
+  const handleCustom = (event) => {
+    if (event.target.checked) setIsCustom(true);
+    else setIsCustom(false);
+  }
+
+  // useEffect(() => {
+  //   setOrder({ asc: false, desc: false });
+
+  // }, [order]);
+
+  const handleUp = (event) => {
+    if (event.target.checked) {
+      if (order.desc) { setOrder({ asc: true, desc: false }) }
+      else setOrder({ ...order, asc: true });
+    }
+    else setOrder({ ...order, asc: false });
+  }
+  const handleDown = (event) => {
+    if (event.target.checked) {
+      if (order.asc) { setOrder({ asc: false, desc: true }) }
+      else setOrder({ ...order, desc: true });
+    }
+    else setOrder({ ...order, desc: false });
+  }
+
+
   return (
     <div className={styles.container}>
       <div className={styles.orden}>
@@ -10,27 +60,27 @@ const Sidebar = ({ data }) => {
           {/* <p>Ordenar:</p> */}
           <form action="#">
             <label>
-              <input type="checkbox" defaultChecked="true" />Ascendente
+              <input type="checkbox" checked={order.asc} onChange={handleUp} />Ascendente
             </label><br />
 
             <label>
-              <input type="checkbox" defaultChecked="true" />Descendente
+              <input type="checkbox" checked={order.desc} onChange={handleDown} />Descendente
               <span></span>
-            </label><br />
+            </label><br /><br />
 
           </form>
         </div>
         <div >
-          <p>Tipo de ordenamiento:</p>
+          <span>Tipo de ordenamiento:</span>
           <form action="#">
 
             <label>
-              <input type="checkbox" defaultChecked="true" />Por alfabeto
+              <input type="checkbox" />Por alfabeto
               <span ></span>
             </label><br />
 
             <label>
-              <input type="checkbox" defaultChecked="true" />Por tipo
+              <input type="checkbox" />Por tipo
               <span ></span>
             </label><br />
 
@@ -44,38 +94,28 @@ const Sidebar = ({ data }) => {
           <form action="#">
 
             <label>
-              <input type="checkbox" defaultChecked="true" />Originales
+              <input type="checkbox" checked={isOriginal} onChange={handleOriginal} />Originales
               <span ></span>
             </label><br />
 
             <label>
-              <input type="checkbox" defaultChecked="true" />Personalizados
+              <input type="checkbox" checked={isCustom} onChange={handleCustom} />Personalizados
               <span ></span>
-            </label><br />
+            </label><br /><br />
 
           </form>
         </div>
         <div >
-          <p>Filtrar por tipo:</p>
+          <span>Filtrar por tipo:</span>
           <form action="#">
 
             <label>
-              <input type="checkbox" defaultChecked="true" />Normal
-              <span ></span>
-            </label><br />
-
-            <label>
-              <input type="checkbox" defaultChecked="true" />Flying
-              <span ></span>
-            </label><br />
-
-            <label>
-              <input type="checkbox" defaultChecked="true" />Poison
-              <span ></span>
-            </label><br />
-
-            <label>
-              <input type="checkbox" defaultChecked="true" />Grass
+              <select  >
+                <option>Seleccione un tipo</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
               <span ></span>
             </label><br />
 
