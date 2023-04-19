@@ -7,6 +7,8 @@ export const GET_FAVORITES = "GET_FAVORITES";
 
 export const ALL_POKEMONS = "ALL_POKEMONS";
 export const ALL_TYPES = "ALL_TYPES";
+export const ORDER_POKEMONS = "ORDER_POKEMONS";
+export const ALL_MY_POKEMONS = "ALL_MY_POKEMONS";
 
 // export const ADD_CHARACTER = "ADD_CHARACTER";
 // export const REMOVE_CHARACTER = "REMOVE_CHARACTER";
@@ -40,15 +42,26 @@ export const getFavorites = () => {
   };
 };
 
-export const allPokemons = () => {
+
+
+
+
+export const allPokemons = (queryComplet) => {
   return async function (dispatch) {
 
     try {
-      const response = await axios.get(`/`);
+      const response = await axios.get(`/pokemons/${queryComplet}`);
       dispatch({ type: ALL_POKEMONS, payload: response.data });
     } catch (error) {
 
     }
+
+  };
+};
+export const allMyPokemons = () => {
+  return function (dispatch) {
+
+    dispatch({ type: ALL_MY_POKEMONS, });
 
   };
 };
@@ -58,7 +71,20 @@ export const allTypes = () => {
 
     try {
       const response = await axios.get(`/types`);
-      dispatch({ type: ALL_TYPES, payload: response.data });
+      const data = response.data.map(elem => elem.name)
+      dispatch({ type: ALL_TYPES, payload: data });
+    } catch (error) {
+
+    }
+
+  };
+};
+export const orderPoke = (queryComplet) => {
+  return async function (dispatch) {
+
+    try {
+      const response = await axios.get(`/pokemons/${queryComplet}`);
+      dispatch({ type: ORDER_POKEMONS, payload: response.data });
     } catch (error) {
 
     }

@@ -76,14 +76,14 @@ const getAll = async (cacheDb, cacheApi, cacheMax) => {
 const orderAll = (array, order, sort) => {
 
   if (sort === "name") {
-    if (order === "asc") {
+    if (order === "desc") {
       array.sort((a, b) => {
         if (a.name > b.name) return -1;
         if (a.name < b.name) return 1;
         return 0;
       });
     }
-    if (order === "desc") {
+    if (order === "asc") {
       array.sort((a, b) => {
         if (a.name < b.name) return -1;
         if (a.name > b.name) return 1;

@@ -31,6 +31,7 @@ const getPokeByIdHandler = async (req, res) => {
 
 const postPokeHandler = async (req, res) => {
   const customPoke = req.body;
+  console.log(customPoke);
   try {
     const newPoke = await postPokemon(customPoke);
     res.status(200).json(newPoke)

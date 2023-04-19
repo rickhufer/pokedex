@@ -9,7 +9,7 @@ const postPokemon = async ({ name, image, hp, attack, defense, speed, height, we
   })
   if (!created) throw Error(`El personaje ${name} ya fue creado`)
 
-  myPoke.addTypes(types);
+  else await myPoke.addTypes(types);
   return myPoke;
 }
 

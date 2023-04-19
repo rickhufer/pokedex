@@ -4,23 +4,22 @@ import { Link } from "react-router-dom";
 // import CardModal from '../CardModal';
 import styles from "./Cards.module.css"
 
-import { allPokemons, allTypes } from "../../redux/actions";
+import { allPokemons, allTypes, allMyPokemons, orderPoke } from "../../redux/actions";
 import { useEffect } from "react";
 import Card from "../Card/Card"
 
 const Cards = () => {
-  allTypes();
+
   const dispatch = useDispatch();
   const myPokemons = useSelector((state) => state.myPokemons);
-
 
   const [visible, setVisible] = useState(6);
   const showMoreItems = () => {
     setVisible((prevValue) => prevValue + 6);
   }
 
-  useEffect(() => {
-    dispatch(allPokemons());
+  useEffect(async () => {
+
   }, []);
 
   const [modalShow, setModalShow] = useState(false);

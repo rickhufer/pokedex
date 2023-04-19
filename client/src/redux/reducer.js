@@ -8,13 +8,16 @@ import {
   GET_FAVORITES,
 
   ALL_POKEMONS,
+  ALL_MY_POKEMONS,
   ALL_TYPES,
+  ORDER_POKEMONS,
 } from "./actions";
 
 const initialState = {
   myFavorites: [],
   allCharacters: [],
   myPokemons: [],
+  myCache: [],
   myTypes: [],
 };
 
@@ -78,13 +81,24 @@ const rootReducer = (state = initialState, action) => {
     case ALL_POKEMONS:
       return {
         ...state,
+        myCache: [...action.payload],
+      };
+    case ALL_MY_POKEMONS:
+      return {
+        ...state,
+        myPokemons: [...state.myCache],
+      };
+
+    case ORDER_POKEMONS:
+      return {
+        ...state,
         myPokemons: [...action.payload],
       };
 
     case ALL_TYPES:
       return {
         ...state,
-        allTypes: [...action.payload],
+        myTypes: [...action.payload],
       };
 
     default:
