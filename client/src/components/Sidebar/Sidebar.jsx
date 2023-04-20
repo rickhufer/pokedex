@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Sidebar.module.css"
 import { useEffect, useState } from "react";
-import { allPokemons, allTypes, allMyPokemons } from "../../redux/actions";
+import { allPokemons, allTypes } from "../../redux/actions";
 
 const Sidebar = () => {
   const [order, setOrder] = useState({
@@ -24,7 +24,7 @@ const Sidebar = () => {
       let querys = "?" + formatOrder(order) + "&" + formatFilter(filters);
       await dispatch(allTypes());
       await dispatch(allPokemons(querys));
-      dispatch(allMyPokemons());
+      // dispatch(allMyPokemons());
     }
     inicio();
   }, [dispatch, order, filters]);

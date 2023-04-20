@@ -34,7 +34,9 @@ const Detail = () => {
           <p><b>Peso:</b> {poke.weight}</p>
           <p><b>Personalizado:</b> {poke.custom}</p>
           <p><b>Tipos: </b>{poke.types.map((elem) => elem).join(", ")}</p>
-          <img className={styles.img} src={poke.image} alt={poke.name} />
+          <div className={styles.cardMedia}>
+            <img className={styles.img} src={poke.image} alt={poke.name} />
+          </div>
         </>
       ) : ("...cargando")
       }

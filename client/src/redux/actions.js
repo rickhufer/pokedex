@@ -6,9 +6,10 @@ export const ORDER = "ORDER";
 export const GET_FAVORITES = "GET_FAVORITES";
 
 export const ALL_POKEMONS = "ALL_POKEMONS";
+export const POKEMON_BY_NAME = "POKEMON_BY_NAME";
 export const ALL_TYPES = "ALL_TYPES";
 export const ORDER_POKEMONS = "ORDER_POKEMONS";
-export const ALL_MY_POKEMONS = "ALL_MY_POKEMONS";
+// export const ALL_MY_POKEMONS = "ALL_MY_POKEMONS";
 
 // export const ADD_CHARACTER = "ADD_CHARACTER";
 // export const REMOVE_CHARACTER = "REMOVE_CHARACTER";
@@ -46,25 +47,25 @@ export const getFavorites = () => {
 
 
 
-export const allPokemons = (queryComplet) => {
+export const allPokemons = (allQuery) => {
   return async function (dispatch) {
 
     try {
-      const response = await axios.get(`/pokemons/${queryComplet}`);
+      const response = await axios.get(`/pokemons/${allQuery}`);
       dispatch({ type: ALL_POKEMONS, payload: response.data });
     } catch (error) {
-
+      window.alert(error)
     }
 
   };
 };
-export const allMyPokemons = () => {
-  return function (dispatch) {
+// export const allMyPokemons = () => {
+//   return function (dispatch) {
 
-    dispatch({ type: ALL_MY_POKEMONS, });
+//     dispatch({ type: ALL_MY_POKEMONS, });
 
-  };
-};
+//   };
+// };
 
 export const allTypes = () => {
   return async function (dispatch) {
@@ -74,9 +75,7 @@ export const allTypes = () => {
       const data = response.data.map(elem => elem.name)
       dispatch({ type: ALL_TYPES, payload: data });
     } catch (error) {
-
     }
-
   };
 };
 export const orderPoke = (queryComplet) => {
@@ -85,6 +84,16 @@ export const orderPoke = (queryComplet) => {
     try {
       const response = await axios.get(`/pokemons/${queryComplet}`);
       dispatch({ type: ORDER_POKEMONS, payload: response.data });
+    } catch (error) {
+    }
+  };
+};
+export const getPokemonsByName = (name) => {
+  return async function (dispatch) {
+
+    try {
+      const response = await axios.get(`/pokemons/${name}`);
+      dispatch({ type: POKEMON_BY_NAME, payload: response.data });
     } catch (error) {
 
     }

@@ -5,16 +5,17 @@ const { Pokemon, Type } = require("../db")
 var cacheAll = [];
 var cacheApi = [];
 var cacheDb = [];
+var myFav = [25, 175, 54, 52, 39, 143];
 
 const getPokemons = async (page, order, sort, type, custom) => {
   if (custom === "true") custom = true;
   if (custom === "false") custom = false;
 
-  var cacheMax = 24; let limit = 24; var offset;
+  var cacheMax = 60; let limit = 24; var offset;
 
   // Crea el caché y temp
   if (cacheApi.length !== cacheMax) {
-    cacheApi = await getApi(cacheMax)
+    cacheApi = await getApi(cacheMax, myFav)
   };
   cacheDb = await getDb();
   cacheAll = [...cacheDb, ...cacheApi];
@@ -40,19 +41,31 @@ const getPokemons = async (page, order, sort, type, custom) => {
   return cacheAll;
 }
 
-const getApi = async (cacheMax) => {
-  cont = 1;
-
+const getApi = async (cacheMax, myFav) => {
+  var cont = 1; var contPoke = 1;
+  var data;
+  var myPoke = []; var cache = [];
   while (cont <= cacheMax) {
-    const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${cont}`);
 
-    let myPoke = format(data.data);
+    if (cont <= myFav.length) {
+      data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${myFav[cont - 1]}`);
+    } else {
+      var prueba = myFav.findIndex(elem => contPoke === elem);
+      while (prueba !== -1) {
+        contPoke++;
+        prueba = myFav.findIndex(elem => contPoke === elem);
+      }
+      data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${contPoke}`);
+      contPoke++;
+    }
+
+    myPoke = format(data.data);
     myPoke.custom = false;
-    cacheApi.push(myPoke);
+    cache.push(myPoke);
     cont++;
   }
 
-  return cacheApi;
+  return cache;
 }
 
 const getDb = async () => {
