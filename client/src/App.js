@@ -2,6 +2,8 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom'
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
+import Landing from './components/Landing/Landing';
+import Detail from './components/Detail/Detail';
 
 function App() {
   return (
@@ -9,7 +11,9 @@ function App() {
 
       <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<Main />} />
+        <Route path="/detail/:detailId" element={<Detail />} />
       </Routes>
     </div>
   );

@@ -4,17 +4,17 @@ import { connect } from "react-redux"
 import { addFavorite, removeFavorite } from "../../redux/actions";
 import React from "react";
 
-const Card = ({ name, image, custom, types }) => {
+const Card = ({ id, name, image, custom, types }) => {
 
   return (
     <div className={styles.scCardProduct}>
       <div className={styles.cardMedia}>
-        <Link to="/details-01"><img src={image} alt="Axies" /></Link>
-        <div className={styles.comingSoon}>{custom ? "Personalizado" : "Original"}</div>
+        <Link to={`/detail/${id}`}><img src={image} alt={name} /></Link>
+        <div className={styles.custom}>{custom ? "Personalizado" : "Original"}</div>
       </div>
 
       <div className={styles.cardTitle}>
-        <h3><Link className={styles.link} to="/details-01">{name}</Link></h3>
+        <h3><Link className={styles.link} to={`/detail/${id}`}>{name}</Link></h3>
       </div>
 
       <div className="meta-info">

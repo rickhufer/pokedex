@@ -1,43 +1,43 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import styles from "./Detail.module.css";
 import axios from "axios"
 
 const Detail = () => {
   const { detailId } = useParams();
-  const [character, setCharacter] = useState([]);
+  const [poke, setPoke] = useState({});
 
   useEffect(() => {
-    axios.get(`/rickandmorty/detail/${detailId}`)
-      .then((char) => {
-        if (char.data.name) {
-          setCharacter(char.data);
-        } else {
-          window.alert("No hay personajes con ese ID");
-        }
-      })
-      .catch((err) => {
-        window.alert("No hay personajes con ese ID");
-      });
-    return setCharacter({});
+    const carga = async () => {
+      try {
+        const data = await axios.get(`/pokemons/${detailId}`)
+        setPoke(data.data[0]);
+      } catch (error) {
+        window.alert(error);
+      }
+    }
+    carga();
+    return setPoke({});
   }, [detailId]);
 
   return (
     <div className={styles.detailContainer}>
-      {character.name ? (
+      {poke.name ? (
         <>
-          <h2 className={styles.h2}>Personaje {character.id}: {character.name}</h2>
-          <p><b>Status:</b> {character.status}</p>
-          <p><b>Specie:</b> {character.species}</p>
-          <p><b>Gender:</b> {character.gender}</p>
-          <p><b>Origin:</b> {character.origin}</p>
-          <img className={styles.img} src={character.image} alt={character.name} />
+          <p className={styles.id}>id: {poke.id}</p>
+          <h2 className={styles.h2}>{poke.name}</h2>
+          <p><b>Vida:</b> {poke.hp}</p>
+          <p><b>Ataque:</b> {poke.attack}</p>
+          <p><b>Defensa:</b> {poke.defense}</p>
+          <p><b>Velocidad:</b> {poke.speed}</p>
+          <p><b>Altura:</b> {poke.height}</p>
+          <p><b>Peso:</b> {poke.weight}</p>
+          <p><b>Personalizado:</b> {poke.custom}</p>
+          <p><b>Tipos: </b>{poke.types.map((elem) => elem).join(", ")}</p>
+          <img className={styles.img} src={poke.image} alt={poke.name} />
         </>
-      ) : (
-        <FontAwesomeIcon icon={faSpinner} spin size="3x" />
-      )}
+      ) : ("...cargando")
+      }
     </div>
   )
 }

@@ -134,7 +134,7 @@ const getPokemonByName = async (name) => {
 
 
 const getPokemonById = async (id) => {
-
+  console.log(isNaN(id));
   if (isNaN(id)) {
     try {
       let dataDb = await Pokemon.findAll({
@@ -148,6 +148,7 @@ const getPokemonById = async (id) => {
         },
       });
       dataDb = transformCacheDb(dataDb);
+      console.log(dataDb);
       return dataDb;
     } catch (error) {
       throw Error("Este pokemon no existe en los personalizados")
@@ -155,8 +156,12 @@ const getPokemonById = async (id) => {
 
   } else {
     try {
-      const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-      return format(data.data);
+      const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      let myPoke = format(data.data);
+      myPoke.custom = false;
+      let te = [myPoke]
+      console.log(te);
+      return te;
     } catch (error) {
       throw Error("Este pokemon no existe en los originales")
     }
