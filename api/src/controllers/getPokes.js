@@ -104,7 +104,7 @@ const orderAll = (array, order, sort) => {
 
 
 const getPokemonByName = async (name) => {
-
+  name = name.toLowerCase();
   let dataDb = await Pokemon.findAll({
     where: { name: name },
     include: {
@@ -123,7 +123,9 @@ const getPokemonByName = async (name) => {
   if (dataDb.length === 0) {
     try {
       const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      return format(data.data);
+      let myPoke = format(data.data);
+      myPoke.custom = false;
+      return [myPoke];
     } catch (error) {
       throw Error("Este pokemon no existe en los originales ni en los personalizados")
     }
@@ -159,9 +161,7 @@ const getPokemonById = async (id) => {
       const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
       let myPoke = format(data.data);
       myPoke.custom = false;
-      let te = [myPoke]
-      console.log(te);
-      return te;
+      return [myPoke];
     } catch (error) {
       throw Error("Este pokemon no existe en los originales")
     }

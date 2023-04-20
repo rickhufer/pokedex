@@ -7,7 +7,7 @@ const Header = () => {
     <div className={styles.container}>
       {/* <h1>Henry Pokemon</h1> */}
       <div className={styles.containerHeader}>
-        <div><Link to="/home"><img src="./assets/images/logo.png" alt="" /></Link></div>
+        <div><Link to="/home"><img src="../../assets/images/logo.png" alt="" /></Link></div>
         <nav className={styles.nav}>
           {/* <Link to="/home">El home</Link> */}
           <SearchBar />
