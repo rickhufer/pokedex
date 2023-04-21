@@ -1,7 +1,8 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
 import Header from './components/Header/Header';
-import Main from './components/Main/Main';
+import Home from './components/Home/Home';
+import Search from './components/Search/Search';
 import Landing from './components/Landing/Landing';
 import Detail from './components/Detail/Detail';
 
@@ -12,7 +13,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Main />} />
+        <Route path="/home/search" element={<Search />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/detail/:detailId" element={<Detail />} />
       </Routes>
     </div>

@@ -1,7 +1,5 @@
 import styles from "./Card.module.css"
 import { Link } from "react-router-dom"
-// import { connect } from "react-redux"
-// import { addFavorite, removeFavorite } from "../../redux/actions";
 import React from "react";
 
 const Card = ({ id, name, image, custom, types }) => {
@@ -25,18 +23,4 @@ const Card = ({ id, name, image, custom, types }) => {
   )
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     allCharacters: state.allCharacters,
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addFavorite: (character) => { dispatch(addFavorite(character)) },
-//     removeFavorite: (id) => { dispatch(removeFavorite(id)) },
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Card);
 export default Card;

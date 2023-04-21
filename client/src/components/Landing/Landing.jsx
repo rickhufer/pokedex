@@ -3,7 +3,7 @@ import styles from "./Landing.module.css"
 
 const Landing = () => {
   return (
-    <div>Esto es un landing</div>
+    <div className={styles.container}>Esto es un landing</div>
   )
 }
 

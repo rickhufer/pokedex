@@ -28,6 +28,7 @@
 
   .container {
     max-width: 720px;
+    grid-template-columns: 1fr 1fr 1fr;
 
   }
 }
@@ -46,7 +47,7 @@
 
   .container {
     max-width: 1140px;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 

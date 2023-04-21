@@ -1,9 +1,12 @@
+import { useSelector } from "react-redux";
 import Cards from "../Cards/Cards";
 import Sidebar from "../Sidebar/Sidebar";
-import styles from "./Main.module.css"
+import styles from "./Home.module.css"
 
 
-const Main = () => {
+const Home = () => {
+  const myPokemons = useSelector((state) => state.myPokemons);
+
   return (
     <div className={styles.cont}>
       <div className={styles.cont2}>
@@ -12,7 +15,7 @@ const Main = () => {
             <Sidebar />
           </div>
           <div className={styles.myCards}>
-            <Cards />
+            <Cards myPokemons={myPokemons} />
           </div>
         </div>
       </div>
@@ -20,4 +23,4 @@ const Main = () => {
   )
 }
 
-export default Main;
+export default Home;
