@@ -3,88 +3,90 @@ import { useEffect, useState } from "react";
 import styles from "./Form.module.css"
 import validate from "./validate"
 import { allTypes } from "../../redux/actions";
+import axios from "axios";
 
 const Form = (props) => {
   const myTypes = useSelector((state) => state.myTypes)
   const dispatch = useDispatch();
+
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     async function inicio() {
       await dispatch(allTypes());
     }
     inicio();
-    console.log(myTypes);
   }, []);
 
+  const defaultData = {
+    name: "", hp: 1, attack: 1, defense: 1, speed: 0, height: 0, weight: 0, image: "", types: []
+  }
+  const defaultError = { name: "", hp: "", attack: "", defense: "", speed: "", height: "", weight: "", image: "", types: "" }
 
-  const [form, setForm] = useState({
-    name: "",
-    hp: 0,
-    attack: 0,
-    defense: 0,
-    speed: 0, //opcional
-    height: 0, //opcional
-    weight: 0, //opcional
-    image: "",
-    types: []
-  });
-  const [errors, setErrors] = useState({
-    name: "",
-    hp: "",
-    attack: "",
-    defense: "",
-    speed: "", //opcional
-    height: "", //opcional
-    weight: "", //opcional
-    image: "",
-    types: ""
-  });
+  const [form, setForm] = useState(defaultData);
+  const [errors, setErrors] = useState(defaultError);
 
   const getTypeIndex = (type) => myTypes.indexOf(type) + 1;
 
   const handleinputChange = (event) => {
     const prop = event.target.name;
     const val = event.target.value;
-    const isChecked = event.target.checked;
 
     setForm({ ...form, [prop]: val, });
-    // setErrors(validate({ ...form, [prop]: val, }, errors));
+    setErrors(validate({ ...form, [prop]: val, }, errors));
   }
   const handleinputChangeCheck = (event) => {
     const val = event.target.value;
     const isChecked = event.target.checked;
+    const prop = event.target.name;
+    console.log("VAL:", val, ", CHECK:", isChecked, ", PROP:", prop);
+    // const myKey = myTypes.includes(val) ? "types" : "";
 
+    var retorno = {};
     setForm((prevState) => {
       if (isChecked) {
-        console.log(isChecked);
-        return {
+        retorno = {
           ...prevState,
           types: [...prevState.types, getTypeIndex(val)]
-        };
+        }
+        return retorno;
       } else {
-        return {
+        retorno = {
           ...prevState,
           types: prevState.types.filter((item) => item !== getTypeIndex(val))
-        };
+        }
+        return retorno;
       }
     });
+    setErrors(validate(retorno, errors));
   }
   const handleSubmit = (event) => {
     event.preventDefault();
     // props.login(form);
-    console.log(form);
-    if (errors.username === "" && errors.password === "") {
-      alert("El pokemon fue creado");
-      setErrors({ username: "", password: "" })
-      setForm({ username: "", password: "" })
+    console.log("FORM: ", form);
+    console.log("ERRORS: ", errors);
+    if (Object.values(errors).every(elemento => elemento === "")) {
+
+      axios.post(`/pokemons`, form)
+        .then(resp => {
+          setForm(defaultData)
+          alert("El pokemon fue creado");
+        })
+        .catch(err => {
+          setForm(defaultData)
+          alert("Error, vuelve a intentarlo")
+        })
+
+      setErrors(defaultError)
+      setForm(defaultData)
     }
     else alert("Datos incorrectos")
   }
 
-  async function inicio() {
-    await dispatch(allTypes());
-  }
-  inicio();
+  // async function inicio() {
+  //   await dispatch(allTypes());
+  // }
+  // inicio();
 
   return (
     <div className={styles.formContainer}>
@@ -200,7 +202,7 @@ const Form = (props) => {
         </div>
 
         <div className={styles.group}>
-          <label className={styles.label} htmlFor="image" >Sube una imagen: </label>
+          <label className={styles.label} htmlFor="image" >Pega la URL de la imagen (PNG en tamaño 475px x 475px): </label>
           <div>
             <input
               type="text"
@@ -208,12 +210,12 @@ const Form = (props) => {
               className={errors.image ? styles.errors : styles.success}
               value={form.image}
               onChange={handleinputChange} />
-            <br /><span className={styles.inputMessage}>{errors.image}</span>
+            <br /><span className={styles.inputMessage}>{errors.image}</span><br />
           </div>
         </div>
+        <button type='submit' className={styles.button}>Crear</button><br />
+        <div><p>Preview</p>{(form.image || errors.image === "") && <img src={form.image} />}</div>
 
-
-        <button type='submit' className={styles.button}>Crear</button>
       </form>
     </div>
   );
