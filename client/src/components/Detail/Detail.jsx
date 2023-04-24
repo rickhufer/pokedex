@@ -29,9 +29,9 @@ const Detail = () => {
           <p><b>Vida:</b> {poke.hp}</p>
           <p><b>Ataque:</b> {poke.attack}</p>
           <p><b>Defensa:</b> {poke.defense}</p>
-          <p><b>Velocidad:</b> {poke.speed}</p>
-          <p><b>Altura:</b> {poke.height}</p>
-          <p><b>Peso:</b> {poke.weight}</p>
+          {poke.speed && <p><b>Velocidad:</b> {poke.speed}</p>}
+          {poke.height && <p><b>Altura:</b> {poke.height}</p>}
+          {poke.weight && <p><b>Peso:</b> {poke.weight}</p>}
           <p><b>Personalizado:</b> {poke.custom}</p>
           <p><b>Tipos: </b>{poke.types.map((elem) => elem).join(", ")}</p>
           <div className={styles.cardMedia}>

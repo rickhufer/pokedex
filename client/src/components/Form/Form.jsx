@@ -9,22 +9,24 @@ const Form = (props) => {
   const myTypes = useSelector((state) => state.myTypes)
   const dispatch = useDispatch();
 
-  const [imageUrl, setImageUrl] = useState('');
+  // const [imageUrl, setImageUrl] = useState('');
+
+
+  const defaultData = {
+    name: "", hp: 0, attack: 0, defense: 0, speed: 0, height: 0, weight: 0, image: "", types: []
+  }
+  const defaultError = { name: "", hp: "", attack: "", defense: "", speed: "", height: "", weight: "", image: "", types: "" }
+
+  const [form, setForm] = useState(defaultData);
+  const [errors, setErrors] = useState(defaultError);
 
   useEffect(() => {
     async function inicio() {
       await dispatch(allTypes());
     }
     inicio();
+    setForm(defaultData);
   }, []);
-
-  const defaultData = {
-    name: "", hp: 1, attack: 1, defense: 1, speed: 0, height: 0, weight: 0, image: "", types: []
-  }
-  const defaultError = { name: "", hp: "", attack: "", defense: "", speed: "", height: "", weight: "", image: "", types: "" }
-
-  const [form, setForm] = useState(defaultData);
-  const [errors, setErrors] = useState(defaultError);
 
   const getTypeIndex = (type) => myTypes.indexOf(type) + 1;
 
@@ -49,23 +51,35 @@ const Form = (props) => {
           ...prevState,
           types: [...prevState.types, getTypeIndex(val)]
         }
+        setErrors(validate(retorno, errors));
         return retorno;
       } else {
         retorno = {
           ...prevState,
           types: prevState.types.filter((item) => item !== getTypeIndex(val))
         }
+        setErrors(validate(retorno, errors));
         return retorno;
       }
     });
-    setErrors(validate(retorno, errors));
   }
   const handleSubmit = (event) => {
     event.preventDefault();
     // props.login(form);
     console.log("FORM: ", form);
     console.log("ERRORS: ", errors);
+
+    // speed, height, weight
+
+
+
     if (Object.values(errors).every(elemento => elemento === "")) {
+
+      console.log("ANTIGUO", form);
+      Object.keys(form).forEach(key => {
+        if (form[key] === 0 || form[key] === "0") delete form[key];
+      });
+      console.log("NUEVO", form);
 
       axios.post(`/pokemons`, form)
         .then(resp => {
@@ -214,7 +228,7 @@ const Form = (props) => {
           </div>
         </div>
         <button type='submit' className={styles.button}>Crear</button><br />
-        <div><p>Preview</p>{(form.image || errors.image === "") && <img src={form.image} />}</div>
+        <div><p>Preview</p>{(form.image || errors.image === "") && <img alt="pokemon" src={form.image} />}</div>
 
       </form>
     </div>

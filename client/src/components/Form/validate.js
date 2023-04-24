@@ -16,7 +16,8 @@ const validate = (form, er) => {
     errors.defense = "El nivel de ataque debe ser número entero y mayor a 0";
   } else errors.defense = "";
 
-  if (form.image.length < 1 || !(form.image.includes("https://") || form.image.includes("http://"))) {
+  if (form.image === undefined) form.image = "";
+  if (!(form.image.includes("https://") || form.image.includes("http://"))) {
     errors.image = "El campo de imagen no puede estar vacío y debe incluir http";
   } else errors.image = ""
 
