@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import Cards from "../Cards/Cards";
-import Sidebar from "../Sidebar/Sidebar";
+import Cards from "../../components/Cards/Cards";
+import Sidebar from "../../components/Sidebar/Sidebar";
 import styles from "./Home.module.css"
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";

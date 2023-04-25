@@ -40,9 +40,6 @@ const Form = (props) => {
   const handleinputChangeCheck = (event) => {
     const val = event.target.value;
     const isChecked = event.target.checked;
-    const prop = event.target.name;
-    console.log("VAL:", val, ", CHECK:", isChecked, ", PROP:", prop);
-    // const myKey = myTypes.includes(val) ? "types" : "";
 
     var retorno = {};
     setForm((prevState) => {
@@ -65,21 +62,12 @@ const Form = (props) => {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    // props.login(form);
-    console.log("FORM: ", form);
-    console.log("ERRORS: ", errors);
 
-    // speed, height, weight
+    if (Object.values(errors).every(elem => elem === "")) {
 
-
-
-    if (Object.values(errors).every(elemento => elemento === "")) {
-
-      console.log("ANTIGUO", form);
       Object.keys(form).forEach(key => {
         if (form[key] === 0 || form[key] === "0") delete form[key];
       });
-      console.log("NUEVO", form);
 
       axios.post(`/pokemons`, form)
         .then(resp => {
@@ -101,6 +89,9 @@ const Form = (props) => {
   //   await dispatch(allTypes());
   // }
   // inicio();
+
+  // var buttonDisabled = Object.values(errors).every((value) => value === '');
+  // console.log(buttonDisabled);
 
   return (
     <div className={styles.formContainer}>
@@ -227,7 +218,7 @@ const Form = (props) => {
             <br /><span className={styles.inputMessage}>{errors.image}</span><br />
           </div>
         </div>
-        <button type='submit' className={styles.button}>Crear</button><br />
+        <button disabled={true} type='submit' className={styles.button}>Crear</button><br />
         <div><p>Preview</p>{(form.image || errors.image === "") && <img alt="pokemon" src={form.image} />}</div>
 
       </form>

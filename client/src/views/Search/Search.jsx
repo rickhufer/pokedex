@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-import Cards from "../Cards/Cards";
-import Sidebar from "../Sidebar/Sidebar";
+import Cards from "../../components/Cards/Cards";
+import Sidebar from "../../components/Sidebar/Sidebar";
 import styles from "./Search.module.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
