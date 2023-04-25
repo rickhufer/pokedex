@@ -18,7 +18,7 @@
   padding: 0.6rem;
   border-radius: 0.4rem;
   border: none;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 .errors {
@@ -41,17 +41,89 @@
 }
 
 .button {
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 0.4rem;
   border: none;
   margin: 20px auto;
   background-color: rgb(199, 163, 41);
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 1.4rem;
   color: rgb(29, 28, 28);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.buttonDis {
+  padding: 10px 20px;
+  border-radius: 0.4rem;
+  border: none;
+  margin: 20px auto;
+  background-color: rgb(110, 109, 104);
+  font-size: 1.4rem;
+  color: rgb(29, 28, 28);
+  text-transform: uppercase;
+}
+
+.label {
+  padding-bottom: 8px;
+  display: block;
+}
+
+.cont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.form>h1 {
+  text-align: center;
+  color: #ffbd0c;
+  text-transform: uppercase;
+}
+
+.cardMedia {
+  width: 60%;
+  height: 60%;
+  /* position: relative; */
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-color: white;
+  /* height: 220px; */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cardMedia img {
+  width: 80%;
+  height: 80%;
+
+
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+
+}
+
+.divInput {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.divInput label input[type='checkbox'] {
+  appearance: none;
+  border: 2px solid gray;
+  border-radius: 4px;
+  width: 1.5rem;
+  height: 1.5rem;
   cursor: pointer;
 }
 
-/* .label {
-  padding-top: 20px;
-} */
+.divInput label input[type='checkbox']:checked {
+  background-color: #ffbd0c;
+}

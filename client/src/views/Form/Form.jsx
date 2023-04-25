@@ -90,137 +90,147 @@ const Form = (props) => {
   // }
   // inicio();
 
-  var buttonDisabled = Object.values(errors).every((value) => value === '');
-  console.log(buttonDisabled);
+  var buttonDisabled = !Object.values(errors).every((value) => value === '');
+
 
   return (
     <div className={styles.formContainer}>
-      <form onSubmit={handleSubmit}>
-        <h1>Crea tu propio pokemon</h1><hr /><br />
-        <div className={styles.group}>
-          <label className={styles.label} htmlFor="name" >Nombre: </label>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <h1>Crea tu propio pokemon</h1>
+        <div className={styles.cont}>
           <div>
-            <input
-              type="text"
-              name='name'
-              className={errors.name ? styles.errors : styles.success}
-              value={form.name}
-              onChange={handleinputChange} />
-            <br /><span className={styles.inputMessage}>{errors.name}</span>
-          </div>
-        </div>
-
-        <div className={styles.group}>
-          <label className={styles.label} htmlFor="hp" >Vida: </label>
-          <div>
-            <input
-              type="number"
-              name='hp'
-              className={errors.hp ? styles.errors : styles.success}
-              value={form.hp}
-              onChange={handleinputChange} />
-            <br /><span className={styles.inputMessage}>{errors.hp}</span>
-          </div>
-        </div>
-
-        <div className={styles.group}>
-          <label className={styles.label} htmlFor="attack" >Ataque: </label>
-          <div>
-            <input
-              type="number"
-              name='attack'
-              className={errors.attack ? styles.errors : styles.success}
-              value={form.attack}
-              onChange={handleinputChange} />
-            <br /><span className={styles.inputMessage}>{errors.attack}</span>
-          </div>
-        </div>
-
-        <div className={styles.group}>
-          <label className={styles.label} htmlFor="defense" >Defensa: </label>
-          <div>
-            <input
-              type="number"
-              name='defense'
-              className={errors.defense ? styles.errors : styles.success}
-              value={form.defense}
-              onChange={handleinputChange} />
-            <br /><span className={styles.inputMessage}>{errors.defense}</span>
-          </div>
-        </div>
-
-        <div className={styles.group}>
-          <label className={styles.label} htmlFor="speed" >Velocidad: </label>
-          <div>
-            <input
-              type="number"
-              name='speed'
-              className={errors.speed ? styles.errors : styles.success}
-              value={form.speed}
-              onChange={handleinputChange} />
-            <br /><span className={styles.inputMessage}>{errors.speed}</span>
-          </div>
-        </div>
-
-        <div className={styles.group}>
-          <label className={styles.label} htmlFor="height" >Altura: </label>
-          <div>
-            <input
-              type="number"
-              name='height'
-              className={errors.height ? styles.errors : styles.success}
-              value={form.height}
-              onChange={handleinputChange} />
-            <br /><span className={styles.inputMessage}>{errors.height}</span>
-          </div>
-        </div>
-
-        <div className={styles.group}>
-          <label className={styles.label} htmlFor="weight" >Peso: </label>
-          <div>
-            <input
-              type="number"
-              name='weight'
-              className={errors.weight ? styles.errors : styles.success}
-              value={form.weight}
-              onChange={handleinputChange} />
-            <br /><span className={styles.inputMessage}>{errors.weight}</span>
-          </div>
-        </div>
-
-        <div className={styles.group}>
-          <label className={styles.label} htmlFor="types" >Tipos: </label>
-          <div>
-            {myTypes.map((type, index) => (
-              <label key={type}>
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="name" >Nombre: </label>
+              <div>
                 <input
-                  type="checkbox"
-                  value={type}
-                  checked={form.types.includes(getTypeIndex(type))}
-                  onChange={handleinputChangeCheck}
-                />
-                {type}
-              </label>
-            ))}
-            <br /><span className={styles.inputMessage}>{errors.types}</span>
-          </div>
-        </div>
+                  type="text"
+                  name='name'
+                  className={errors.name ? styles.errors : styles.success}
+                  value={form.name}
+                  onChange={handleinputChange} />
+                <br /><span className={styles.inputMessage}>{errors.name}</span>
+              </div>
+            </div>
 
-        <div className={styles.group}>
-          <label className={styles.label} htmlFor="image" >Pega la URL de la imagen (PNG en tamaño 475px x 475px): </label>
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="hp" >Vida: </label>
+              <div>
+                <input
+                  type="number"
+                  name='hp'
+                  className={errors.hp ? styles.errors : styles.success}
+                  value={form.hp}
+                  onChange={handleinputChange} />
+                <br /><span className={styles.inputMessage}>{errors.hp}</span>
+              </div>
+            </div>
+
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="attack" >Ataque: </label>
+              <div>
+                <input
+                  type="number"
+                  name='attack'
+                  className={errors.attack ? styles.errors : styles.success}
+                  value={form.attack}
+                  onChange={handleinputChange} />
+                <br /><span className={styles.inputMessage}>{errors.attack}</span>
+              </div>
+            </div>
+
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="defense" >Defensa: </label>
+              <div>
+                <input
+                  type="number"
+                  name='defense'
+                  className={errors.defense ? styles.errors : styles.success}
+                  value={form.defense}
+                  onChange={handleinputChange} />
+                <br /><span className={styles.inputMessage}>{errors.defense}</span>
+              </div>
+            </div>
+
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="speed" >Velocidad: </label>
+              <div>
+                <input
+                  type="number"
+                  name='speed'
+                  className={errors.speed ? styles.errors : styles.success}
+                  value={form.speed}
+                  onChange={handleinputChange} />
+                <br /><span className={styles.inputMessage}>{errors.speed}</span>
+              </div>
+            </div>
+
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="height" >Altura: </label>
+              <div>
+                <input
+                  type="number"
+                  name='height'
+                  className={errors.height ? styles.errors : styles.success}
+                  value={form.height}
+                  onChange={handleinputChange} />
+                <br /><span className={styles.inputMessage}>{errors.height}</span>
+              </div>
+            </div>
+
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="weight" >Peso: </label>
+              <div>
+                <input
+                  type="number"
+                  name='weight'
+                  className={errors.weight ? styles.errors : styles.success}
+                  value={form.weight}
+                  onChange={handleinputChange} />
+                <br /><span className={styles.inputMessage}>{errors.weight}</span>
+              </div>
+            </div>
+
+          </div>
           <div>
-            <input
-              type="text"
-              name='image'
-              className={errors.image ? styles.errors : styles.success}
-              value={form.image}
-              onChange={handleinputChange} />
-            <br /><span className={styles.inputMessage}>{errors.image}</span><br />
-          </div>
-        </div>
-        <button disabled={buttonDisabled} type='submit' className={styles.button}>Crear</button><br />
-        <div><p>Preview</p>{(form.image || errors.image === "") && <img alt="pokemon" src={form.image} />}</div>
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="types" >Tipos: </label>
+              <div className={styles.divInput}>
+                {myTypes.map((type, index) => (
+                  <div key={index}>
+                    <label >
+                      <input
+                        type="checkbox"
+                        value={type}
+                        checked={form.types.includes(getTypeIndex(type))}
+                        onChange={handleinputChangeCheck}
+                      />
+                      {type}
+                    </label>
+                  </div>
+                ))}
+                <br /><span className={styles.inputMessage}>{errors.types}</span>
+              </div>
+            </div>
 
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="image" >Pega la URL de la imagen (PNG en tamaño 475px x 475px): </label>
+              <div>
+                <input
+                  type="text"
+                  name='image'
+                  className={errors.image ? styles.errors : styles.success}
+                  value={form.image}
+                  onChange={handleinputChange} />
+                <br /><span className={styles.inputMessage}>{errors.image}</span><br />
+              </div>
+              <div><p>Preview</p>{(form.image !== "" && errors.image === "") && <div className={styles.cardMedia}><img alt="pokemon" src={form.image} /></div>}</div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <button disabled={buttonDisabled} type='submit' className={buttonDisabled ? styles.buttonDis : styles.button}>Crear</button><br />
       </form>
     </div>
   );
