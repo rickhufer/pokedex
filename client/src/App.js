@@ -23,11 +23,6 @@ function App() {
           <Route path="/home/detail/:detailId" element={<Detail />} />
         </Route>
 
-        {/* <Route exact path="/" element={<Landing />} />
-        <Route path="/home/search" element={<Search />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/create" element={<Form />} />
-        <Route path="/detail/:detailId" element={<Detail />} /> */}
       </Routes>
     </div>
   );
