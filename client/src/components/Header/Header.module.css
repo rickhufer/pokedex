@@ -32,7 +32,7 @@
   display: flex;
   /* height: 60px; */
   /* background-color: aquamarine; */
-  justify-content: space-between;
+  justify-content: center;
   margin: 10px;
 }
 
@@ -101,6 +101,10 @@
 
   .searchbar {
     justify-content: right;
+  }
+
+  .nav {
+    justify-content: start;
   }
 }
 
