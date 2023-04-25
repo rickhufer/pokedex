@@ -2,7 +2,7 @@
   color: white;
   background-color: aqua;
   width: 100vw;
-  height: 85vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,4 +13,28 @@
   background: linear-gradient(0deg, rgba(13, 86, 87, 1) 0%, rgba(27, 24, 97, 1) 100%);
   background-image: url("../../assets/images/w_pokemon.jpg");
   object-fit: cover;
+  background-size: cover;
+}
+
+.logo {
+  /* background-color: burlywood; */
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+}
+
+.logoimg {
+  width: 50%;
+}
+
+.button {
+  margin-top: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: aqua;
+  padding: 20px 30px;
+  font-size: medium;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
 }
