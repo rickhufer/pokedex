@@ -11,7 +11,7 @@ const Header = () => {
         <nav className={styles.nav}>
 
           <Link className={styles.myLink} to="/home">Home</Link>
-          <Link className={styles.myLink} to="/create">Creador de pokemones</Link>
+          <Link className={styles.myLink} to="/home/create">Creador de pokemones</Link>
 
         </nav>
         <div className={styles.searchbar}>

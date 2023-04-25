@@ -7,12 +7,12 @@ const Card = ({ id, name, image, custom, types }) => {
   return (
     <div className={styles.scCardProduct}>
       <div className={styles.cardMedia}>
-        <Link to={`/detail/${id}`}><img src={image} alt={name} /></Link>
+        <Link to={`/home/detail/${id}`}><img src={image} alt={name} /></Link>
         <div className={styles.custom}>{custom ? "Personalizado" : "Original"}</div>
       </div>
 
       <div className={styles.cardTitle}>
-        <h3><Link className={styles.link} to={`/detail/${id}`}>{name}</Link></h3>
+        <h3><Link className={styles.link} to={`/home/detail/${id}`}>{name}</Link></h3>
       </div>
 
       <div className="meta-info">

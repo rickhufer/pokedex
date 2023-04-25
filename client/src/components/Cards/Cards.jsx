@@ -16,11 +16,9 @@ const Cards = ({ myPokemons }) => {
 
   const itemsPage = [];
   for (let i = 1; i <= totalPages; i++) {
-    itemsPage.push(<Link className={styles.linkP} key={i} to={`/home/?page=${i}`} ><div className={param == i ? styles.actual : styles.pages}>{i}</div></Link>);
+    itemsPage.push(<Link className={styles.linkP} key={i} to={`/home/?page=${i}`} ><div className={param === i ? styles.actual : styles.pages}>{i}</div></Link>);
   }
-  const breakPage = (event) => {
-    console.log(event.target.name);
-  }
+
 
   useEffect(() => {
     setMyPoke([])

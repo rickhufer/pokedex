@@ -1,3 +1,16 @@
 .container {
   color: white;
+  background-color: aqua;
+  width: 100vw;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  /* background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%); */
+  background: rgb(13, 86, 87);
+  background: linear-gradient(0deg, rgba(13, 86, 87, 1) 0%, rgba(27, 24, 97, 1) 100%);
+  background-image: url("../../assets/images/w_pokemon.jpg");
+  object-fit: cover;
 }

@@ -90,8 +90,8 @@ const Form = (props) => {
   // }
   // inicio();
 
-  // var buttonDisabled = Object.values(errors).every((value) => value === '');
-  // console.log(buttonDisabled);
+  var buttonDisabled = Object.values(errors).every((value) => value === '');
+  console.log(buttonDisabled);
 
   return (
     <div className={styles.formContainer}>
@@ -218,7 +218,7 @@ const Form = (props) => {
             <br /><span className={styles.inputMessage}>{errors.image}</span><br />
           </div>
         </div>
-        <button disabled={true} type='submit' className={styles.button}>Crear</button><br />
+        <button disabled={buttonDisabled} type='submit' className={styles.button}>Crear</button><br />
         <div><p>Preview</p>{(form.image || errors.image === "") && <img alt="pokemon" src={form.image} />}</div>
 
       </form>
