@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Sidebar.module.css"
 import { useEffect, useState } from "react";
 import { allPokemons, allTypes } from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [order, setOrder] = useState({

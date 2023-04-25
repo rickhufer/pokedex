@@ -15,7 +15,7 @@ const SearchBar = () => {
     }
   }
   const onSearch = () => {
-    setInputName("");
+    // setInputName("");
     const params = [['name', inputName]];
     navigate({
       pathname: '/home/search',

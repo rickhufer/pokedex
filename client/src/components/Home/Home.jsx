@@ -2,10 +2,20 @@ import { useSelector } from "react-redux";
 import Cards from "../Cards/Cards";
 import Sidebar from "../Sidebar/Sidebar";
 import styles from "./Home.module.css"
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 const Home = () => {
   const myPokemons = useSelector((state) => state.myPokemons);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate({
+      pathname: '/home',
+      search: ``,
+    })
+  }, [myPokemons]);
 
   return (
     <div className={styles.cont}>
