@@ -1,9 +1,9 @@
 .contSearch {
-  width: 100%;
-  height: 90px;
+  /* width: 100%;
+  height: 90px; */
   display: flex;
-  justify-content: right;
   align-items: center;
+  justify-content: end;
 }
 
 .button {
@@ -15,9 +15,10 @@
   border: 3px solid rgb(255, 255, 255);
   border-radius: 5px;
   color: white;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   height: 100%;
-
+  display: block;
+  width: 100%;
 }
 
 .button2 {
@@ -40,6 +41,7 @@
 
 .input {
   /* height: 40px; */
+  display: block;
   padding: 10px;
   font-size: 1.8rem;
   border: 3px solid rgb(255, 255, 255);
@@ -47,6 +49,7 @@
   margin: 0;
   height: 100%;
   background-color: #ffbd0c;
+  width: 100%;
 }
 
 .input:focus {
@@ -56,8 +59,11 @@
 
 .search {
   height: 60px;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  box-sizing: border-box;
+  gap: 5px;
+  margin: 5px;
 }
 
 
@@ -83,6 +89,7 @@
 
 
   .contSearch {
+    align-items: center;
     max-width: 960px;
   }
 }

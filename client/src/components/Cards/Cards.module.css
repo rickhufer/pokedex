@@ -15,21 +15,23 @@
 
 .contPages {
   margin: 20px 0;
+  /* grid-template-columns: auto; */
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .pages {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aliceblue;
+  background-color: #3f59a9;
   padding: 10px;
   cursor: pointer;
   margin: 10px;
   width: 40px;
   height: 40px;
-  color: black;
+  color: white;
 }
 
 .actual {
@@ -43,6 +45,12 @@
   height: 40px;
   color: black;
   background-color: #ffbd0c;
+}
+
+.linkP {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
 }
 
 

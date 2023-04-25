@@ -7,11 +7,17 @@ const Header = () => {
     <div className={styles.container}>
       {/* <h1>Henry Pokemon</h1> */}
       <div className={styles.containerHeader}>
-        <div><Link to="/home"><img src="../../assets/images/logo.png" alt="" /></Link></div>
+        <div className={styles.logo}><Link to="/home"><img src="../../assets/images/logo.png" alt="" /></Link></div>
         <nav className={styles.nav}>
-          {/* <Link to="/home">El home</Link> */}
-          <SearchBar />
+
+          <Link className={styles.myLink} to="/home">Home</Link>
+          <Link className={styles.myLink} to="/home">Creador de pokemones</Link>
+
+
         </nav>
+        <div className={styles.searchbar}>
+          <SearchBar />
+        </div>
       </div>
       {/* <div className={styles.espacio}></div> */}
     </div>
