@@ -21,7 +21,7 @@ const Cards = ({ myPokemons }) => {
 
   const itemsPage = [];
   for (let i = 1; i <= totalPages; i++) {
-    itemsPage.push(<Link onClick={() => updatePage()} key={i} to={`/home/?page=${i}`} ><div className={styles.pages}>{i}</div></Link>);
+    itemsPage.push(<Link onClick={() => updatePage()} key={i} to={`/home/?page=${i}`} ><div className={param == i ? styles.actual : styles.pages}>{i}</div></Link>);
   }
   const breakPage = (event) => {
     console.log(event.target.name);
@@ -38,17 +38,13 @@ const Cards = ({ myPokemons }) => {
     setMyPoke(myPokemons.slice(numInicio, numInicio + perPage));
   }, [myPokemons, param])
 
-  console.log("SOY PARAM: ", param);
-  console.log("SOU PAGINA TOTAL: ", totalPages);
   return (
     <div>
       <div className={styles.contPages}>
-
-        {/* <button onClick={() => breakPage()} name="holaa" className={styles.pages}>&lt;&lt;</button> */}
-
         <Link to={param <= 1 ? `/home/?page=${param}` : `/home/?page=${param - 1}`} ><div className={styles.pages}>&lt;&lt;</div></Link>
 
         {itemsPage}
+
         <Link to={param >= totalPages ? `/home/?page=${param}` : `/home/?page=${Number(param) + 1}`} ><div className={styles.pages}>&gt;&gt;</div></Link>
       </div>
       <div className={styles.completo}>

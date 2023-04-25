@@ -32,6 +32,19 @@
   color: black;
 }
 
+.actual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  color: black;
+  background-color: #ffbd0c;
+}
+
 
 @media (min-width: 576px) {
 
