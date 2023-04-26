@@ -29,11 +29,11 @@ const Cards = ({ myPokemons }) => {
   return (
     <div>
       <div className={styles.contPages}>
-        <Link className={styles.linkP} to={param <= 1 ? `/home/?page=${param}` : `/home/?page=${param - 1}`} ><div className={styles.pages}>&lt;&lt;</div></Link>
+        <Link className={styles.linkP} to={param <= 1 ? (`/home/?page=${param}`) : `/home/?page=${param - 1}`} ><div className={styles.pages}>&lt;&lt;</div></Link>
 
         {itemsPage}
 
-        <Link className={styles.linkP} to={param >= totalPages ? `/home/?page=${param}` : `/home/?page=${Number(param) + 1}`} ><div className={styles.pages}>&gt;&gt;</div></Link>
+        <Link className={styles.linkP} to={param >= totalPages ? `/home/?page=${param}` : param === null ? (`/home/?page=2`) : `/home/?page=${Number(param) + 1}`} ><div className={styles.pages}>&gt;&gt;</div></Link>
       </div>
       <div className={styles.completo}>
         <div className={styles.container}>

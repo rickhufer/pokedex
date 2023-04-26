@@ -99,8 +99,9 @@ const Form = (props) => {
         <h1>Crea tu propio pokemon</h1>
         <div className={styles.cont}>
           <div>
+            <span className={styles.aviso}>* indica que es obligatorio</span><br /><br />
             <div className={styles.group}>
-              <label className={styles.label} htmlFor="name" >Nombre: </label>
+              <label className={styles.label} htmlFor="name" >Nombre: <span className={styles.aviso}>*</span></label>
               <div>
                 <input
                   type="text"
@@ -113,7 +114,7 @@ const Form = (props) => {
             </div>
 
             <div className={styles.group}>
-              <label className={styles.label} htmlFor="hp" >Vida: </label>
+              <label className={styles.label} htmlFor="hp" >Vidas: <span className={styles.aviso}>*</span></label>
               <div>
                 <input
                   type="number"
@@ -126,7 +127,7 @@ const Form = (props) => {
             </div>
 
             <div className={styles.group}>
-              <label className={styles.label} htmlFor="attack" >Ataque: </label>
+              <label className={styles.label} htmlFor="attack" >Ataque: <span className={styles.aviso}>*</span></label>
               <div>
                 <input
                   type="number"
@@ -139,7 +140,7 @@ const Form = (props) => {
             </div>
 
             <div className={styles.group}>
-              <label className={styles.label} htmlFor="defense" >Defensa: </label>
+              <label className={styles.label} htmlFor="defense" >Defensa: <span className={styles.aviso}>*</span></label>
               <div>
                 <input
                   type="number"
@@ -213,7 +214,7 @@ const Form = (props) => {
             </div>
 
             <div className={styles.group}>
-              <label className={styles.label} htmlFor="image" >Pega la URL de la imagen (PNG en tamaño 475px x 475px): </label>
+              <label className={styles.label} htmlFor="image" >Pega la URL de la imagen (PNG en tamaño 475px x 475px): <span className={styles.aviso}>*</span></label>
               <div>
                 <input
                   type="text"
