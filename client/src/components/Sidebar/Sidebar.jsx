@@ -99,26 +99,26 @@ const Sidebar = () => {
         <h4>ORDENACIÓN</h4>
         <div>
           {/* <p>Ordenar:</p> */}
-          <form action="#">
+          <form className={styles.form} action="#">
             <label>
               <input type="checkbox" name="asc" checked={order.asc} onChange={handleUp} />Ascendente
-            </label><br />
+            </label>
 
             <label>
               <input type="checkbox" checked={order.desc} onChange={handleDown} />Descendente
               <span></span>
-            </label><br /><br />
+            </label><br />
 
           </form>
         </div>
         <div >
           <span>Tipo de ordenamiento:</span>
-          <form action="#">
+          <form className={styles.form} action="#">
 
             <label>
               <input type="checkbox" checked={order.alfa} onChange={handleAlfa} />Por alfabeto
               <span ></span>
-            </label><br />
+            </label>
 
             <label>
               <input type="checkbox" checked={order.attack} onChange={handleAttack} />Por ataque
@@ -132,23 +132,23 @@ const Sidebar = () => {
         <h4>FILTRADO</h4>
         <div >
           {/* <p>Filtrar por:</p> */}
-          <form action="#">
+          <form className={styles.form} action="#">
 
             <label>
               <input type="checkbox" checked={filters.original} onChange={handleOriginal} />Originales
               <span ></span>
-            </label><br />
+            </label>
 
             <label>
               <input type="checkbox" checked={filters.custom} onChange={handleCustom} />Personalizados
               <span ></span>
-            </label><br /><br />
+            </label><br />
 
           </form>
         </div>
         <div >
           <span>Filtrar por tipo:</span>
-          <form action="#">
+          <form className={styles.form} action="#">
 
             <label>
               <select value={filters.tipo} onChange={handleTipo}>

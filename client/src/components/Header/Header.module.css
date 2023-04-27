@@ -63,9 +63,9 @@
   justify-content: center;
 }
 
-.logo>img {
-  /* background-color: aqua; */
-}
+/* .logo>img {
+  background-color: aqua;
+} */
 
 .searchbar {
   display: flex;

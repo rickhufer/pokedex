@@ -27,7 +27,7 @@ const Search = () => {
       <div className={styles.cont2}>
         <div className={styles.container}>
           <div className={styles.sideBar}>
-            <Sidebar />
+            {/* <Sidebar /> */}
           </div>
           <div className={styles.myCards}>
             <Cards myPokemons={poke} />

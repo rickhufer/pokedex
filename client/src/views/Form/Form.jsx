@@ -98,7 +98,7 @@ const Form = (props) => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1>Crea tu propio pokemon</h1>
         <div className={styles.cont}>
-          <div>
+          <div className={styles.contDiv}>
             <span className={styles.aviso}>* indica que es obligatorio</span><br /><br />
             <div className={styles.group}>
               <label className={styles.label} htmlFor="name" >Nombre: <span className={styles.aviso}>*</span></label>
@@ -192,7 +192,7 @@ const Form = (props) => {
             </div>
 
           </div>
-          <div>
+          <div className={styles.contDiv}>
             <div className={styles.group}>
               <label className={styles.label} htmlFor="types" >Tipos: </label>
               <div className={styles.divInput}>
@@ -228,12 +228,9 @@ const Form = (props) => {
               </div>
               <div><p>Preview</p>{(form.image !== "" && errors.image === "") && <div className={styles.cardMedia}><img alt="pokemon" src={form.image} /></div>}</div>
             </div>
-
           </div>
-
-
         </div>
-        <button disabled={buttonDisabled} type='submit' className={buttonDisabled ? styles.buttonDis : styles.button}>Crear</button><br />
+        {buttonDisabled ? ((<button type='submit' className={styles.buttonDis}>Crear</button>)) : (<button type='submit' className={styles.button}>Crear</button>)}<br />
       </form>
     </div>
   );
