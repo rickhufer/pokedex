@@ -1,5 +1,4 @@
 
-
 const format = (data) => {
   let { id, name, image, sprites, stats, height, weight, types } = data;
 
@@ -16,9 +15,9 @@ const format = (data) => {
 
   types = types.map((elem) => elem.type.name)
 
-
   return { id, name, image, hp, attack, defense, speed, height, weight, types }
 }
+
 const transformCacheDb = (array) => {
   return array.map(obj => ({
     id: obj.id,

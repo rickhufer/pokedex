@@ -1,8 +1,4 @@
-// const getPokemonByName = require("../controllers/getPokemonByName");
-// const getPokemons = require("../controllers/getPokemons")
-// const getPokemonById = require("../controllers/getPokemonById")
 const postPokemon = require("../controllers/postPokemon")
-
 const { getPokemons, getPokemonById, getPokemonByName } = require("../controllers/getPokes")
 
 const getPokeHandler = async (req, res) => {
@@ -17,7 +13,6 @@ const getPokeHandler = async (req, res) => {
   }
 }
 
-
 const getPokeByIdHandler = async (req, res) => {
   const { idPokemon } = req.params;
   try {
@@ -28,10 +23,8 @@ const getPokeByIdHandler = async (req, res) => {
   }
 }
 
-
 const postPokeHandler = async (req, res) => {
   const customPoke = req.body;
-  console.log(customPoke);
   try {
     const newPoke = await postPokemon(customPoke);
     res.status(200).json(newPoke)
