@@ -9,16 +9,23 @@ const Search = () => {
   const [params] = useSearchParams();
   const [poke, setPoke] = useState([]);
 
-  useEffect(() => {
-    const carga = async (params) => {
-      let param = params.get("name");
+  const carga = async (params) => {
+    let param = params.get("name");
+    if (param) {
       try {
-        const data = param ? await axios.get(`/pokemons/?name=${param}`) : { data: [] };
+        const data = await axios.get(`/pokemons/?name=${param}`);
         setPoke(data.data);
       } catch (error) {
         setPoke([]);
+        window.alert("No se encontró el Pokemon")
       }
+    } else {
+      setPoke([]);
+      window.alert("No se encontró el Pokemon")
     }
+  }
+
+  useEffect(() => {
     carga(params);
   }, [params])
 

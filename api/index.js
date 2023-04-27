@@ -23,7 +23,7 @@ const getTypes = require("./src/controllers/getTypes.js")
 
 // Syncing all the models at once.
 conn.sync(
-  { alter: true }
+  { alter: true },
   // { force: true }
 ).then(() => {
   server.listen(3001, () => {
@@ -33,3 +33,4 @@ conn.sync(
   .then(() => {
     getTypes();
   })
+

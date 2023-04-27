@@ -21,12 +21,13 @@ const SearchBar = () => {
       pathname: '/home/search',
       search: `?${createSearchParams(params)}`,
     })
+    setInputName("");
   }
 
   return (
     <div className={styles.contSearch}>
       <div className={styles.search}>
-        <input onKeyDown={handleEnter} defaultValue={inputName} onChange={handleInput} className={styles.input} type="text" />
+        <input onKeyDown={handleEnter} value={inputName} onChange={handleInput} className={styles.input} type="text" />
         <button onClick={() => onSearch()} className={styles.button} type='submit'>Buscar</button>
       </div>
     </div>

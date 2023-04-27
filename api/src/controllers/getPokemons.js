@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { format, transformCacheDb } = require("../utils/format")
+// const { format, transformCacheDb } = require("../utils/format")
 const { Pokemon, Type } = require("../db")
 
 var cacheAll = [];
@@ -8,6 +8,7 @@ var cacheDb = [];
 var myFav = [25, 175, 54, 52, 39, 143];
 
 // Obtiene todos los pokemones de la Api y DB
+// Tambien recibe los tipos de ordenación y filtros
 const getPokemons = async (page, order, sort, type, custom) => {
   if (custom === "true") custom = true;
   if (custom === "false") custom = false;
@@ -41,6 +42,7 @@ const getPokemons = async (page, order, sort, type, custom) => {
   return cacheAll;
 }
 
+// Obtiene los pokemones por nombre
 const getPokemonByName = async (name) => {
   name = name.toLowerCase();
   let dataDb = await Pokemon.findAll({
@@ -71,6 +73,7 @@ const getPokemonByName = async (name) => {
 
 }
 
+// Obtiene los pokemones por su ID
 const getPokemonById = async (id) => {
   if (isNaN(id)) {
     try {
@@ -84,6 +87,8 @@ const getPokemonById = async (id) => {
           // }
         },
       });
+
+      if (dataDb.length === 0) return { message: "Este pokemon no existe en los personalizados" };
       dataDb = transformCacheDb(dataDb);
       return dataDb;
     } catch (error) {
@@ -182,6 +187,43 @@ const orderAll = (array, order, sort) => {
   }
 
   return array;
+}
+
+// FUNCION DE APOYO: Formatea los datos obtenido de la API
+const format = (data) => {
+  let { id, name, image, sprites, stats, height, weight, types } = data;
+
+  name = name;
+  id = id;
+  image = sprites.other["official-artwork"].front_default;
+  // image = sprites.other.dream_world.front_default;
+  hp = stats[0].base_stat;
+  attack = stats[1].base_stat;
+  defense = stats[2].base_stat;
+  speed = stats[5].base_stat;
+  height = height;
+  weight = weight;
+
+  types = types.map((elem) => elem.type.name)
+
+  return { id, name, image, hp, attack, defense, speed, height, weight, types }
+}
+
+// FUNCION DE APOYO: Formatea los datos que estan en la DB
+const transformCacheDb = (array) => {
+  return array.map(obj => ({
+    id: obj.id,
+    name: obj.name,
+    hp: obj.hp,
+    attack: obj.attack,
+    defense: obj.defense,
+    speed: obj.speed,
+    height: obj.height,
+    weight: obj.weight,
+    image: obj.image,
+    custom: obj.custom,
+    types: obj.dataValues.types.map(typeObj => typeObj.dataValues.name)
+  }));
 }
 
 
