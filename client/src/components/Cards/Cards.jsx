@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+
 import styles from "./Cards.module.css"
 import Card from "../Card/Card"
 
 const Cards = ({ myPokemons }) => {
   const [params] = useSearchParams();
-
   let param = params.get("page");
 
   const perPage = 12;
@@ -18,7 +18,6 @@ const Cards = ({ myPokemons }) => {
   for (let i = 1; i <= totalPages; i++) {
     itemsPage.push(<Link className={styles.linkP} key={i} to={`/home/?page=${i}`} ><div className={param === i ? styles.actual : styles.pages}>{i}</div></Link>);
   }
-
 
   useEffect(() => {
     setMyPoke([])
@@ -39,15 +38,11 @@ const Cards = ({ myPokemons }) => {
         <div className={styles.container}>
           {
             myPoke.map(({ id, name, image, custom, types }) => (
-              // myPokemons.slice(0, visible).map(({ id, name, image, custom, types }) => (
-
               <Card key={id} id={id} name={name} image={image} custom={custom} types={types} />
             ))
           }
         </div>
-
       </div>
-
     </div>
   )
 }

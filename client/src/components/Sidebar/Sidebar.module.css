@@ -19,8 +19,6 @@
   letter-spacing: -0.7px;
 }
 
-
-
 .orden {
   background-color: rgba(240, 255, 255, 0.50);
   flex-basis: 48%;
@@ -60,12 +58,6 @@
 }
 
 .form label select {
-  /* appearance: none;
-  border: 2px solid #3f59a9;
-  border-radius: 4px;
-  width: 1.2rem;
-  height: 1.7rem;
-  cursor: pointer; */
   width: 100%;
   font-size: 0.9rem;
   padding: 0.5rem;
@@ -78,8 +70,6 @@
 .form label select:hover {
   border-color: #555;
 }
-
-
 
 
 
@@ -99,7 +89,6 @@
 
 @media (min-width: 992px) {
 
-
   .container {
     max-width: 960px;
     grid-template-columns: 100%;
@@ -107,7 +96,6 @@
 }
 
 @media (min-width: 1200px) {
-
 
   .container {
     max-width: 1140px;

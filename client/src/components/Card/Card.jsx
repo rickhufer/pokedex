@@ -1,6 +1,7 @@
-import styles from "./Card.module.css"
-import { Link } from "react-router-dom"
 import React from "react";
+import { Link } from "react-router-dom"
+
+import styles from "./Card.module.css"
 
 const Card = ({ id, name, image, custom, types }) => {
 
@@ -19,7 +20,6 @@ const Card = ({ id, name, image, custom, types }) => {
         {types.map((item, index) => (<span key={index} className={styles.types}>{item}</span>))}
       </div>
     </div>
-
   )
 }
 

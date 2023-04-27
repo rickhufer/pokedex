@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./Sidebar.module.css"
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import styles from "./Sidebar.module.css"
 import { allPokemons, allTypes } from "../../redux/actions";
 
 const Sidebar = () => {
@@ -24,7 +25,6 @@ const Sidebar = () => {
       let querys = "?" + formatOrder(order) + "&" + formatFilter(filters);
       await dispatch(allTypes());
       await dispatch(allPokemons(querys));
-      // dispatch(allMyPokemons());
     }
     inicio();
   }, [dispatch, order, filters]);
@@ -33,17 +33,17 @@ const Sidebar = () => {
     let a = !asc && !desc ? ("") : (asc && !desc ? "order=asc" : "order=desc");
     let b = !asc && !desc ? ("") : (alfa && !attack ? "&sort=name" : "&sort=attack");
     let c = `${a}${b}`;
-    // console.log(c);
     return c;
   }
   const formatFilter = ({ original, custom, tipo }) => {
     var a = !original && !custom ? ("") : (original && !custom ? "custom=false" : "custom=true");
     var b = tipo === "" ? ("") : (`type=${tipo}`);
     var c = `${a}&${b}`;
-    // console.log(c);
     return c;
   }
 
+  // ======== Checkbox ORDENACIÓN
+  // Ascendente
   const handleUp = (event) => {
     if (event.target.checked) {
       if (order.desc) { setOrder({ ...order, asc: true, desc: false }) }
@@ -51,6 +51,7 @@ const Sidebar = () => {
     }
     else setOrder({ ...order, asc: false });
   }
+  // Descendente
   const handleDown = (event) => {
     if (event.target.checked) {
       if (order.asc) { setOrder({ ...order, asc: false, desc: true }) }
@@ -58,13 +59,14 @@ const Sidebar = () => {
     }
     else setOrder({ ...order, desc: false });
   }
+  // Alfabeticamente
   const handleAlfa = (event) => {
     if (event.target.checked) {
       setOrder({ ...order, attack: false, alfa: true })
     }
     else setOrder({ ...order, attack: true, alfa: false })
   }
-
+  // Por ataque
   const handleAttack = (event) => {
     if (event.target.checked) {
       setOrder({ ...order, attack: true, alfa: false })
@@ -72,12 +74,8 @@ const Sidebar = () => {
     else setOrder({ ...order, attack: false, alfa: true })
   }
 
-  const handleTipo = (event) => {
-    setFilters({
-      ...filters,
-      tipo: event.target.value,
-    })
-  }
+  // ======== Checkbox FILTRADO
+  // Pokemones de la API
   const handleOriginal = (event) => {
     if (event.target.checked) {
       if (filters.custom) { setFilters({ ...filters, custom: false, original: true }) }
@@ -85,6 +83,7 @@ const Sidebar = () => {
     }
     else setFilters({ ...filters, original: false });
   }
+  // Pokemones creados por el usuario
   const handleCustom = (event) => {
     if (event.target.checked) {
       if (filters.original) { setFilters({ ...filters, custom: true, original: false }) }
@@ -92,13 +91,21 @@ const Sidebar = () => {
     }
     else setFilters({ ...filters, custom: false });
   }
+  // Por tipo
+  const handleTipo = (event) => {
+    setFilters({
+      ...filters,
+      tipo: event.target.value,
+    })
+  }
 
   return (
     <div className={styles.container}>
+
+      {/* Ordenación */}
       <div className={styles.orden}>
         <h4>ORDENACIÓN</h4>
         <div>
-          {/* <p>Ordenar:</p> */}
           <form className={styles.form} action="#">
             <label>
               <input type="checkbox" name="asc" checked={order.asc} onChange={handleUp} />Ascendente
@@ -128,12 +135,12 @@ const Sidebar = () => {
           </form>
         </div>
       </div>
+
+      {/* Filtrado */}
       <div className={styles.filtrado}>
         <h4>FILTRADO</h4>
         <div >
-          {/* <p>Filtrar por:</p> */}
           <form className={styles.form} action="#">
-
             <label>
               <input type="checkbox" checked={filters.original} onChange={handleOriginal} />Originales
               <span ></span>

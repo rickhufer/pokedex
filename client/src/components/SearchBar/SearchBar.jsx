@@ -1,6 +1,7 @@
-import styles from "./SearchBar.module.css"
 import { useState } from 'react'
 import { createSearchParams, useNavigate } from "react-router-dom";
+
+import styles from "./SearchBar.module.css"
 
 const SearchBar = () => {
   const navigate = useNavigate();
@@ -15,7 +16,6 @@ const SearchBar = () => {
     }
   }
   const onSearch = () => {
-    // setInputName("");
     const params = [['name', inputName]];
     navigate({
       pathname: '/home/search',
@@ -23,14 +23,11 @@ const SearchBar = () => {
     })
   }
 
-
   return (
     <div className={styles.contSearch}>
       <div className={styles.search}>
         <input onKeyDown={handleEnter} defaultValue={inputName} onChange={handleInput} className={styles.input} type="text" />
-        <button onClick={() => onSearch()} className={styles.button} type='submit'>
-          Buscar
-        </button>
+        <button onClick={() => onSearch()} className={styles.button} type='submit'>Buscar</button>
       </div>
     </div>
   )

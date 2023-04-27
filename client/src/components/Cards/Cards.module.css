@@ -5,17 +5,14 @@
   display: grid;
   gap: 15px;
   color: white;
-  /* max-width: 1140px; */
 }
 
 .completo {
   width: 100%;
-
 }
 
 .contPages {
   margin: 20px 0;
-  /* grid-template-columns: auto; */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -54,6 +51,9 @@
 }
 
 
+
+
+
 @media (min-width: 576px) {
 
   .container {
@@ -73,7 +73,6 @@
 
 @media (min-width: 992px) {
 
-
   .container {
     max-width: 960px;
 
@@ -81,7 +80,6 @@
 }
 
 @media (min-width: 1200px) {
-
 
   .container {
     max-width: 1140px;
