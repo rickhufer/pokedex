@@ -1,16 +1,11 @@
 .cont {
   background-repeat: no-repeat;
-  /* background-image: url("../../assets/images/wallpaper.jpg"); */
-  /* background-color: #14141f; */
-
   background-size: cover;
   width: 100%;
   object-fit: cover;
 }
 
 .cont2 {
-  /* background-image: linear-gradient(to right, rgba(241.5, 220.5, 31.5, 1) calc((50vw - 170px) - 340px), rgba(241.5, 220.5, 31.5, 0.84) 50%, rgba(241.5, 220.5, 31.5, 0.84) 100%); */
-  /* background-color: rgba(241.5, 220.5, 31.5, 0.3); */
   box-sizing: border-box;
 }
 
@@ -22,11 +17,7 @@
   padding: 15px 0;
   display: grid;
   max-width: 1140px;
-
-
-
 }
-
 
 @media (min-width: 576px) {
 
@@ -44,7 +35,6 @@
 
 @media (min-width: 992px) {
 
-
   .container {
     max-width: 960px;
     grid-template-columns: 20% 80%;
@@ -53,10 +43,8 @@
 
 @media (min-width: 1200px) {
 
-
   .container {
     max-width: 1140px;
-    /* grid-template-columns: 25% 75%; */
   }
 }
 
@@ -64,6 +52,5 @@
 
   .container {
     max-width: 1320px;
-    /* grid-template-columns: 25% 75%; */
   }
 }

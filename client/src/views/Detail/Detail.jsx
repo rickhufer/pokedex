@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styles from "./Detail.module.css";
 import axios from "axios"
+
+import styles from "./Detail.module.css";
 
 const Detail = () => {
   const { detailId } = useParams();
@@ -32,7 +33,6 @@ const Detail = () => {
               </div>
             </div>
             <div className={styles.datos}>
-
 
               <div className={styles.caja}>
                 <p><b>Vida:</b> {poke.hp}</p>

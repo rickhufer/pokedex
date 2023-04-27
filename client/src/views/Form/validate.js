@@ -1,8 +1,7 @@
 
-
 const validate = (form, er) => {
   const errors = { ...er }
-  // Email Username
+
   if (form.name === "") {
     errors.name = "Falta añadir nombre al Pokémon";
   } else errors.name = ""
@@ -20,14 +19,6 @@ const validate = (form, er) => {
   if (!(form.image.includes("https://") || form.image.includes("http://"))) {
     errors.image = "El campo de imagen no puede estar vacío y debe incluir http";
   } else errors.image = ""
-
-  //   • Tener al menos 8 caracteres
-  // ~ Tener al menos 1 letra (a, b, c...)
-  // • Tener al menos 1 número (1, 2, 3...)
-  // • Incluir caracteres en mayúsculas y minúsculas
-  // La contraseña NO debe
-  // ~ Contener 4 caracteres consecutivos (p. ej.,
-  // '11111", "12345", "abcde", o "qwert")
 
   return errors;
 }

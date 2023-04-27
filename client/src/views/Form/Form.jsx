@@ -1,16 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import styles from "./Form.module.css"
-import validate from "./validate"
-import { allTypes } from "../../redux/actions";
 import axios from "axios";
+
+import validate from "./validate"
+import styles from "./Form.module.css"
+import { allTypes } from "../../redux/actions";
 
 const Form = (props) => {
   const myTypes = useSelector((state) => state.myTypes)
   const dispatch = useDispatch();
-
-  // const [imageUrl, setImageUrl] = useState('');
-
 
   const defaultData = {
     name: "", hp: 0, attack: 0, defense: 0, speed: 0, height: 0, weight: 0, image: "", types: []
