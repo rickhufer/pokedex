@@ -1,7 +1,7 @@
 .formContainer {
   max-width: 992px;
-  width: 95%;
-  margin: 30px auto;
+  /* width: 95%; */
+  margin: 30px 50px;
   color: white;
 }
 
@@ -70,14 +70,14 @@
 
 .cont {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-columns: 100%;
 }
 
 .form {
   display: flex;
   justify-content: center;
   flex-direction: column;
-
 }
 
 .form>h1 {
@@ -115,7 +115,12 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.divInput label input[type='checkbox'] {
+.myCheck {
+  display: flex;
+  align-items: center;
+}
+
+.divInput .myCheck input[type='checkbox'] {
   appearance: none;
   border: 2px solid gray;
   border-radius: 4px;
@@ -124,10 +129,37 @@
   cursor: pointer;
 }
 
-.divInput label input[type='checkbox']:checked {
+.divInput .myCheck input[type='checkbox']:checked {
   background-color: #ffbd0c;
 }
 
 .aviso {
   color: red;
 }
+
+
+
+
+
+
+
+/* =========== */
+
+@media (min-width: 576px) {}
+
+@media (min-width: 768px) {
+
+  .cont {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .formContainer {
+    margin: 30px 70px;
+  }
+}
+
+@media (min-width: 992px) {}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}

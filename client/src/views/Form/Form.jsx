@@ -197,16 +197,18 @@ const Form = (props) => {
               <label className={styles.label} htmlFor="types" >Tipos: </label>
               <div className={styles.divInput}>
                 {myTypes.map((type, index) => (
-                  <div key={index}>
+                  <div className={styles.myCheck} key={index}>
+
+                    <input
+                      type="checkbox"
+                      value={type}
+                      checked={form.types.includes(getTypeIndex(type))}
+                      onChange={handleinputChangeCheck}
+                    />
                     <label >
-                      <input
-                        type="checkbox"
-                        value={type}
-                        checked={form.types.includes(getTypeIndex(type))}
-                        onChange={handleinputChangeCheck}
-                      />
                       {type}
                     </label>
+
                   </div>
                 ))}
                 <br /><span className={styles.inputMessage}>{errors.types}</span>
