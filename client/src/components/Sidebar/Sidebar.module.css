@@ -1,0 +1,111 @@
+.container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 48% 48%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1000px;
+  gap: 10px 10px;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.label {
+  line-height: 16px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  padding-left: 24px;
+  letter-spacing: -0.7px;
+}
+
+.orden {
+  background-color: rgba(240, 255, 255, 0.50);
+  flex-basis: 48%;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.filtrado {
+  background-color: rgba(240, 255, 255, 0.50);
+  flex-basis: 48%;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.form {
+  margin-top: 5px;
+}
+
+.form label {
+  display: flex;
+  align-items: center;
+}
+
+.form label input[type='checkbox'] {
+  appearance: none;
+  border: 2px solid #3f59a9;
+  border-radius: 4px;
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+.form label input[type='checkbox']:checked {
+  background-color: #ffbd0c;
+}
+
+.form label select {
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.form label select:hover {
+  border-color: #555;
+}
+
+
+
+@media (min-width: 576px) {
+
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  .container {
+    max-width: 960px;
+    grid-template-columns: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+
+  .container {
+    max-width: 1320px;
+
+  }
+}

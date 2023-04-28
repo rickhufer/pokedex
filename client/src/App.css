@@ -1,10 +1,23 @@
-.App {
-  text-align: center;
+.fondo {
+  background-repeat: no-repeat;
+  background-image: url("./assets/images/pokemon-go-do.jpg");
+  background-color: #61dafb;
+  background-size: cover;
+  width: 100%;
+  object-fit: cover;
+}
+
+.fondo-img {
+  width: 100%;
+  height: 25vh;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.506);
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -28,11 +41,8 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.flat-title-page {
+  position: relative;
+  background-size: cover;
+  padding: 100px 0 20px;
 }

@@ -1,0 +1,95 @@
+.container {
+  width: 100%;
+  grid-template-columns: 1fr;
+  padding: 5px 10px;
+  display: grid;
+  gap: 15px;
+  color: white;
+}
+
+.completo {
+  width: 100%;
+}
+
+.contPages {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3f59a9;
+  padding: 10px;
+  cursor: pointer;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
+.actual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  color: black;
+  background-color: #ffbd0c;
+}
+
+.linkP {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+
+
+
+
+
+@media (min-width: 576px) {
+
+  .container {
+    max-width: 540px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .container {
+    max-width: 720px;
+    grid-template-columns: 1fr 1fr 1fr;
+
+  }
+}
+
+@media (min-width: 992px) {
+
+  .container {
+    max-width: 960px;
+
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .container {
+    max-width: 1140px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1400px) {
+
+  .container {
+    max-width: 1320px;
+  }
+}
