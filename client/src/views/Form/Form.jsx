@@ -6,28 +6,26 @@ import validate from "./validate"
 import styles from "./Form.module.css"
 import { allTypes } from "../../redux/actions";
 
-const Form = (props) => {
+const Form = () => {
   const myTypes = useSelector((state) => state.myTypes)
   const dispatch = useDispatch();
 
-  const defaultData = {
-    name: "", hp: 0, attack: 0, defense: 0, speed: 0, height: 0, weight: 0, image: "", types: []
-  }
+  const defaultData = { name: "", hp: 0, attack: 0, defense: 0, speed: 0, height: 0, weight: 0, image: "", types: [] }
   const defaultError = { name: "", hp: "", attack: "", defense: "", speed: "", height: "", weight: "", image: "", types: "" }
 
   const [form, setForm] = useState(defaultData);
   const [errors, setErrors] = useState(defaultError);
 
   useEffect(() => {
-    async function inicio() {
-      await dispatch(allTypes());
-    }
-    inicio();
-    setForm(defaultData);
+    dispatch(allTypes());
   }, []);
 
+  var buttonDisabled = !Object.values(errors).every((value) => value === '');
+
+  // Busca el valor en los tipos y si lo encuentra en Checkbox le asigna True
   const getTypeIndex = (type) => myTypes.indexOf(type) + 1;
 
+  // Handle solo para los inputs básicos
   const handleinputChange = (event) => {
     const prop = event.target.name;
     const val = event.target.value;
@@ -35,61 +33,54 @@ const Form = (props) => {
     setForm({ ...form, [prop]: val, });
     setErrors(validate({ ...form, [prop]: val, }, errors));
   }
+  // Handle para los checkbox
   const handleinputChangeCheck = (event) => {
     const val = event.target.value;
     const isChecked = event.target.checked;
 
     var retorno = {};
-    setForm((prevState) => {
+    setForm((pState) => {
       if (isChecked) {
         retorno = {
-          ...prevState,
-          types: [...prevState.types, getTypeIndex(val)]
+          ...pState,
+          types: [...pState.types, getTypeIndex(val)]
         }
         setErrors(validate(retorno, errors));
         return retorno;
       } else {
         retorno = {
-          ...prevState,
-          types: prevState.types.filter((item) => item !== getTypeIndex(val))
+          ...pState,
+          types: pState.types.filter((item) => item !== getTypeIndex(val))
         }
         setErrors(validate(retorno, errors));
         return retorno;
       }
     });
   }
+
+  // Handle para enviar los datos con el botón
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (Object.values(errors).every(elem => elem === "")) {
 
+      // Elimina los datos innecesarios que son cero
       Object.keys(form).forEach(key => {
         if (form[key] === 0 || form[key] === "0") delete form[key];
       });
 
       axios.post(`/pokemons`, form)
         .then(resp => {
-          setForm(defaultData)
-          alert("El pokemon fue creado");
+          alert(resp.data.message)
         })
         .catch(err => {
-          setForm(defaultData)
-          alert("Error, vuelve a intentarlo")
+          err.response.data.message ? alert(err.response.data.message) : alert("Debe añadir valores en los campos")
         })
 
       setErrors(defaultError)
       setForm(defaultData)
-    }
-    else alert("Datos incorrectos")
+    } else alert("Datos incompletos")
   }
-
-  // async function inicio() {
-  //   await dispatch(allTypes());
-  // }
-  // inicio();
-
-  var buttonDisabled = !Object.values(errors).every((value) => value === '');
-
 
   return (
     <div className={styles.formContainer}>
@@ -228,7 +219,7 @@ const Form = (props) => {
             </div>
           </div>
         </div>
-        {buttonDisabled ? ((<button type='submit' className={styles.buttonDis}>Crear</button>)) : (<button type='submit' className={styles.button}>Crear</button>)}<br />
+        {buttonDisabled ? ((<button type='submit' disabled={true} className={styles.buttonDis}>Crear</button>)) : (<button type='submit' className={styles.button}>Crear</button>)}<br />
       </form>
     </div>
   );

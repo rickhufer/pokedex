@@ -8,15 +8,16 @@ const Detail = () => {
   const { detailId } = useParams();
   const [poke, setPoke] = useState({});
 
-  useEffect(() => {
-    const carga = async () => {
-      try {
-        const data = await axios.get(`/pokemons/${detailId}`)
-        setPoke(data.data[0]);
-      } catch (error) {
-        window.alert(error);
-      }
+  const carga = async () => {
+    try {
+      const data = await axios.get(`/pokemons/${detailId}`)
+      setPoke(data.data[0]);
+    } catch (error) {
+      window.alert(error);
     }
+  }
+
+  useEffect(() => {
     carga();
     return setPoke({});
   }, [detailId]);

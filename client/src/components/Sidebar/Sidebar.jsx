@@ -20,14 +20,15 @@ const Sidebar = () => {
   const myTypes = useSelector(state => state.myTypes);
   const dispatch = useDispatch();
 
+  const carga = async () => {
+    let querys = "?" + formatOrder(order) + "&" + formatFilter(filters);
+    dispatch(allTypes());
+    dispatch(allPokemons(querys));
+  }
+
   useEffect(() => {
-    async function inicio() {
-      let querys = "?" + formatOrder(order) + "&" + formatFilter(filters);
-      await dispatch(allTypes());
-      await dispatch(allPokemons(querys));
-    }
-    inicio();
-  }, [dispatch, order, filters]);
+    carga();
+  }, [order, filters]);
 
   const formatOrder = ({ asc, desc, alfa, attack, }) => {
     let a = !asc && !desc ? ("") : (asc && !desc ? "order=asc" : "order=desc");

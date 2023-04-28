@@ -31,7 +31,7 @@ const postPokeHandler = async (req, res) => {
     const [myPoke, created] = await postPokemon(customPoke);
     created ? res.status(201).json({ message: `Pokemon ${myPoke.dataValues.name} fue creado exitosamente.` }) : res.status(409).json({ message: `El Pokemon ${myPoke.dataValues.name} ya existe en la base de datos.` })
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json(error.message)
   }
 }
 

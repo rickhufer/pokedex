@@ -11,6 +11,7 @@ const Home = () => {
   const myPokemons = useSelector((state) => state.myPokemons);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     navigate({
       pathname: '/home',
