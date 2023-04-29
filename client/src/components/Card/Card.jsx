@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 import styles from "./Card.module.css"
 
-const Card = ({ id, name, image, custom, types }) => {
+const Card = ({ id, name, image, custom, types, attack }) => {
 
   return (
     <div className={styles.scCardProduct}>
@@ -14,6 +14,9 @@ const Card = ({ id, name, image, custom, types }) => {
 
       <div className={styles.cardTitle}>
         <h3><Link className={styles.link} to={`/home/detail/${id}`}>{name}</Link></h3>
+      </div>
+      <div className={styles.cardTitle}>
+        <h3><Link className={styles.link}>{attack}</Link></h3>
       </div>
 
       <div className="meta-info">

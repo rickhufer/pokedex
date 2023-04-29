@@ -37,8 +37,8 @@ const Cards = ({ myPokemons }) => {
       <div className={styles.completo}>
         <div className={styles.container}>
           {
-            myPoke.map(({ id, name, image, custom, types }) => (
-              <Card key={id} id={id} name={name} image={image} custom={custom} types={types} />
+            myPoke.map(({ id, name, image, custom, types, attack }) => (
+              <Card key={id} id={id} name={name} image={image} custom={custom} types={types} attack={attack} />
             ))
           }
         </div>

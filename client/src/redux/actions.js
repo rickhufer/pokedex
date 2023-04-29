@@ -14,7 +14,6 @@ export const allPokemons = (allQuery) => {
     } catch (error) {
       window.alert(error)
     }
-
   };
 };
 
@@ -26,6 +25,7 @@ export const allTypes = () => {
       const data = response.data.map(elem => elem.name)
       dispatch({ type: ALL_TYPES, payload: data });
     } catch (error) {
+      window.alert(error)
     }
   };
 };
@@ -37,6 +37,7 @@ export const orderPoke = (queryComplet) => {
       const response = await axios.get(`/pokemons/${queryComplet}`);
       dispatch({ type: ORDER_POKEMONS, payload: response.data });
     } catch (error) {
+      window.alert(error)
     }
   };
 };
@@ -48,7 +49,7 @@ export const getPokemonsByName = (name) => {
       const response = await axios.get(`/pokemons/${name}`);
       dispatch({ type: POKEMON_BY_NAME, payload: response.data });
     } catch (error) {
-
+      window.alert(error)
     }
 
   };
