@@ -107,3 +107,5 @@ dist
 package-lock.json
 
 /postgres-data
+
+.DS_Store
