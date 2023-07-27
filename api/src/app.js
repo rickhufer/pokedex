@@ -23,6 +23,9 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+server.use('/favicon.ico', (req, res, next) => {
+  res.status(204).end(); // Responder con un código 204 (No Content)
+});
 server.use(cors());
 server.use('/', routes);
 
