@@ -10,7 +10,7 @@ services:
       - .:/home/api
     depends_on:
       - db
-    command: sh -c "cd /home/api && npm start"
+    command: sh -c "cd /home/api && npm install && npm start"
 
   db:
     image: postgres:14.8-alpine
