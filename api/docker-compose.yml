@@ -8,7 +8,9 @@ services:
       - "${API_PORT}:${API_PORT}"
     volumes:
       - .:/home/api
-    command: sleep infinity
+    depends_on:
+      - db
+    command: sh -c "cd /home/api && npm start"
 
   db:
     image: postgres:14.8-alpine
