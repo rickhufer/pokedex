@@ -3,7 +3,7 @@ import {
   POKEMON_BY_NAME,
   ALL_TYPES,
   ORDER_POKEMONS,
-} from "./actions";
+} from './actions';
 
 const initialState = {
   myPokemons: [],
@@ -11,9 +11,7 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-
   switch (action.type) {
-
     case ALL_POKEMONS:
       return {
         ...state,
@@ -39,9 +37,8 @@ const rootReducer = (state = initialState, action) => {
       };
 
     default:
-      return { ...state }
+      return { ...state };
   }
-
 };
 
 export default rootReducer;

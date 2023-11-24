@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
-import Cards from "../../components/Cards/Cards";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import styles from "./Home.module.css"
-
+import Cards from '../../components/Cards/Cards';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import styles from './Home.module.css';
 
 const Home = () => {
   const myPokemons = useSelector((state) => state.myPokemons);
@@ -16,7 +15,7 @@ const Home = () => {
     navigate({
       pathname: '/home',
       search: ``,
-    })
+    });
   }, [myPokemons]);
 
   return (
@@ -32,7 +31,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Home;
