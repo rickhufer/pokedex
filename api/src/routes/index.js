@@ -1,5 +1,9 @@
 const { Router } = require('express');
-const { getPokeHandler, getPokeByIdHandler, postPokeHandler } = require('../handlers/pokemonsHandlers');
+const {
+  getPokeHandler,
+  getPokeByIdHandler,
+  postPokeHandler,
+} = require('../handlers/pokemonsHandlers');
 const { getTypesHandler } = require('../handlers/typesHandlers');
 
 // Importar todos los routers;
@@ -10,9 +14,9 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.get("/pokemons", getPokeHandler)
-router.get("/pokemons/:idPokemon", getPokeByIdHandler)
-router.post("/pokemons", postPokeHandler)
-router.get("/types", getTypesHandler)
+router.get('/pokemons', getPokeHandler);
+router.get('/pokemons/:idPokemon', getPokeByIdHandler);
+router.post('/pokemons', postPokeHandler);
+router.get('/types', getTypesHandler);
 
 module.exports = router;

@@ -1,8 +1,7 @@
-const { Type } = require("../db");
-const axios = require("axios");
+const { Type } = require('../db');
+const axios = require('axios');
 
 const getTypes = async () => {
-
   const allTypes = await Type.findAll();
   try {
     if (allTypes.length < 20) {
@@ -11,14 +10,12 @@ const getTypes = async () => {
 
       await Type.bulkCreate(myTypes);
       return await Type.findAll();
-
     } else {
       return allTypes;
     }
   } catch (error) {
-    throw Error("Error al intentar cargar los Tipos de Pokemones")
+    throw Error('Error al intentar cargar los Tipos de Pokemones');
   }
-
-}
+};
 
 module.exports = getTypes;

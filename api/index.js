@@ -19,19 +19,22 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const getTypes = require("./src/controllers/getTypes.js")
-const port = process.env.API_PORT || 3001;
+const getTypes = require('./src/controllers/getTypes.js');
+const { getPokemons } = require('./src/controllers/getPokemons.js');
+const port = process.env.PORT || 3001;
 
 // Syncing all the models at once.
-conn.sync(
-  { alter: true },
-  // { force: true }
-).then(() => {
-  server.listen(port, () => {
-    console.log(`%s listening at ${port}`); // eslint-disable-line no-console
-  });
-})
+conn
+  .sync(
+    { alter: true },
+    // { force: true }
+  )
+  .then(() => {
+    server.listen(port, () => {
+      console.log(`%s listening at ${port}`); // eslint-disable-line no-console
+    });
+  })
   .then(() => {
     getTypes();
-  })
-
+    getPokemons();
+  });

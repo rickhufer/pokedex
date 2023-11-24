@@ -1,6 +1,5 @@
-const axios = require("axios");
-// const { format, transformCacheDb } = require("../utils/format")
-const { Pokemon, Type } = require("../db")
+const axios = require('axios');
+const { Pokemon, Type } = require('../db');
 
 var cacheAll = [];
 var cacheApi = [];
@@ -10,15 +9,15 @@ var myFav = [25, 175, 54, 52, 39, 143];
 // Obtiene todos los pokemones de la Api y DB
 // Tambien recibe los tipos de ordenación y filtros
 const getPokemons = async (page, order, sort, type, custom) => {
-  if (custom === "true") custom = true;
-  if (custom === "false") custom = false;
+  if (custom === 'true') custom = true;
+  if (custom === 'false') custom = false;
 
-  var cacheMax = 60; let limit = 24; var offset;
+  var cacheMax = 60;
 
   // Crea el caché y temp
   if (cacheApi.length !== cacheMax) {
-    cacheApi = await getApi(cacheMax, myFav)
-  };
+    cacheApi = await getApi(cacheMax, myFav);
+  }
   cacheDb = await getDb();
   cacheAll = [...cacheDb, ...cacheApi];
 
@@ -29,18 +28,14 @@ const getPokemons = async (page, order, sort, type, custom) => {
 
   // Filtrados
   if (type) {
-    cacheAll = cacheAll.filter(elem => elem.types.includes(type));
+    cacheAll = cacheAll.filter((elem) => elem.types.includes(type));
   }
   if (custom === true || custom === false) {
-    cacheAll = cacheAll.filter(elem => elem.custom === custom);
-  };
+    cacheAll = cacheAll.filter((elem) => elem.custom === custom);
+  }
 
-  //paginado
-  // if (page === undefined) page = 1;
-  // offset = (page - 1) * limit;
-  // return temp.slice(offset, offset + limit);
   return cacheAll;
-}
+};
 
 // Obtiene los pokemones por nombre
 const getPokemonByName = async (name) => {
@@ -67,11 +62,12 @@ const getPokemonByName = async (name) => {
       myPoke.custom = false;
       return [myPoke];
     } catch (error) {
-      throw Error("Este pokemon no existe en los originales ni en los personalizados")
+      throw Error(
+        'Este pokemon no existe en los originales ni en los personalizados',
+      );
     }
   }
-
-}
+};
 
 // Obtiene los pokemones por su ID
 const getPokemonById = async (id) => {
@@ -88,13 +84,13 @@ const getPokemonById = async (id) => {
         },
       });
 
-      if (dataDb.length === 0) return { message: "Este pokemon no existe en los personalizados" };
+      if (dataDb.length === 0)
+        return { message: 'Este pokemon no existe en los personalizados' };
       dataDb = transformCacheDb(dataDb);
       return dataDb;
     } catch (error) {
-      throw Error("Este pokemon no existe en los personalizados")
+      throw Error('Este pokemon no existe en los personalizados');
     }
-
   } else {
     try {
       const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -102,30 +98,29 @@ const getPokemonById = async (id) => {
       myPoke.custom = false;
       return [myPoke];
     } catch (error) {
-      throw Error("Este pokemon no existe en los originales")
+      throw Error('Este pokemon no existe en los originales');
     }
   }
-}
-
-
-
-
+};
 
 // =========== FUNCIONES DE APOYO ===========
 // FUNCION DE APOYO: Obtiene solo los pokemones de la API
 const getApi = async (cacheMax, myFav) => {
-  var cont = 1; var contPoke = 1;
+  var cont = 1;
+  var contPoke = 1;
   var data;
-  var myPoke = []; var cache = [];
+  var myPoke = [];
+  var cache = [];
   while (cont <= cacheMax) {
-
     if (cont <= myFav.length) {
-      data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${myFav[cont - 1]}`);
+      data = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${myFav[cont - 1]}`,
+      );
     } else {
-      var prueba = myFav.findIndex(elem => contPoke === elem);
+      var prueba = myFav.findIndex((elem) => contPoke === elem);
       while (prueba !== -1) {
         contPoke++;
-        prueba = myFav.findIndex(elem => contPoke === elem);
+        prueba = myFav.findIndex((elem) => contPoke === elem);
       }
       data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${contPoke}`);
       contPoke++;
@@ -138,7 +133,7 @@ const getApi = async (cacheMax, myFav) => {
   }
 
   return cache;
-}
+};
 
 // FUNCION DE APOYO: Obtiene solo los pokemones de la Base de Datos
 const getDb = async () => {
@@ -155,20 +150,19 @@ const getDb = async () => {
   cacheDb = transformCacheDb(cacheDb);
 
   return cacheDb;
-}
+};
 
 // FUNCION DE APOYO: Ordena todo los elementos
 const orderAll = (array, order, sort) => {
-
-  if (sort === "name") {
-    if (order === "desc") {
+  if (sort === 'name') {
+    if (order === 'desc') {
       array.sort((a, b) => {
         if (a.name > b.name) return -1;
         if (a.name < b.name) return 1;
         return 0;
       });
     }
-    if (order === "asc") {
+    if (order === 'asc') {
       array.sort((a, b) => {
         if (a.name < b.name) return -1;
         if (a.name > b.name) return 1;
@@ -177,17 +171,17 @@ const orderAll = (array, order, sort) => {
     }
   }
 
-  if (sort === "attack") {
-    if (order === "asc") {
+  if (sort === 'attack') {
+    if (order === 'asc') {
       array.sort((x, y) => x.attack - y.attack);
     }
-    if (order === "desc") {
+    if (order === 'desc') {
       array.sort((x, y) => y.attack - x.attack);
     }
   }
 
   return array;
-}
+};
 
 // FUNCION DE APOYO: Formatea los datos obtenido de la API
 const format = (data) => {
@@ -195,7 +189,7 @@ const format = (data) => {
 
   name = name;
   id = id;
-  image = sprites.other["official-artwork"].front_default;
+  image = sprites.other['official-artwork'].front_default;
   // image = sprites.other.dream_world.front_default;
   hp = stats[0].base_stat;
   attack = stats[1].base_stat;
@@ -204,14 +198,14 @@ const format = (data) => {
   height = height;
   weight = weight;
 
-  types = types.map((elem) => elem.type.name)
+  types = types.map((elem) => elem.type.name);
 
-  return { id, name, image, hp, attack, defense, speed, height, weight, types }
-}
+  return { id, name, image, hp, attack, defense, speed, height, weight, types };
+};
 
 // FUNCION DE APOYO: Formatea los datos que estan en la DB
 const transformCacheDb = (array) => {
-  return array.map(obj => ({
+  return array.map((obj) => ({
     id: obj.id,
     name: obj.name,
     hp: obj.hp,
@@ -222,10 +216,9 @@ const transformCacheDb = (array) => {
     weight: obj.weight,
     image: obj.image,
     custom: obj.custom,
-    types: obj.dataValues.types.map(typeObj => typeObj.dataValues.name)
+    types: obj.dataValues.types.map((typeObj) => typeObj.dataValues.name),
   }));
-}
-
+};
 
 module.exports = {
   getPokemons,
